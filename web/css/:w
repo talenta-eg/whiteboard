@@ -1,0 +1,37 @@
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////// Todo Manager ////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
+function todoManager() {
+
+    var div = document.getElementById("todoList");
+
+    this.todoItems = new Array();
+
+    var uber = this;
+
+    this.updateList = function() {
+        div.innerHTML = "";
+        var list = document.createElement('list');
+        for (var i = 0; i < uber.todoItems.length; i++) {
+            if (uber.todoItems[i].canDo && !uber.todoItems[i].done) {
+                //Create the list item
+                var listItem = document.createElement('li');
+                //Add the title of the todo item
+                listItem.innerHTML += uber.todoItems[i].text+"<br>";
+                //Create the done button
+                var doneButton = document.createElement('button');
+                doneButton.innerHTML = "Done";
+                listItem.appendChild(doneButton);
+                //Create the delete button
+                var deleteButton = document.createElement('button');
+                deleteButton.innerHTML = "Delete";
+                listItem.appendChild(deleteButton);
+                //Append list item
+                list.appendChild(listItem);
+            }
+        }
+        div.appendChild(list);
+    }
+
+}
