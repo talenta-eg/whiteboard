@@ -25,15 +25,21 @@ Quick Guides:
 ----------
 (note on doing this on Mac OS 10.8: *make sure* your $JAVA\_HOME variable is set. I assumed that it would be on a mac. Not so. Also, it needs to be set to a different place than the official Apache docs specify (new in 10.8): /System/Library/Frameworks/JavaVM.framework/Home)
 
-Apache Tomcat 7: http://www3.ntu.edu.sg/home/ehchua/programming/howto/Tomcat\_HowTo.html
-MySQL 5: http://www3.ntu.edu.sg/home/ehchua/programming/sql/MySQL\_HowTo.html
-Alerternative Tutorial for Mac Users (skip everything except for MySQL and Tomcat sections): http://www3.ntu.edu.sg/home/ehchua/programming/howto/Tomcat\_HowTo.html
-Official Tomcat 7 First Webapp: http://tomcat.apache.org/tomcat-7.0-doc/appdev/index.html
+Apache Tomcat 7:<br>
+http://www3.ntu.edu.sg/home/ehchua/programming/howto/Tomcat\_HowTo.html<br>
+MySQL 5:<br>
+http://www3.ntu.edu.sg/home/ehchua/programming/sql/MySQL\_HowTo.html<br>
+Alerternative Tutorial for Mac Users (skip everything except for MySQL and Tomcat sections): <br>
+http://www3.ntu.edu.sg/home/ehchua/programming/howto/Tomcat\_HowTo.html<br>
+Official Tomcat 7 First Webapp:<br>
+http://tomcat.apache.org/tomcat-7.0-doc/appdev/index.html<br>
 
 Official Docs:
 ----------
-Apache Setup: http://tomcat.apache.org/tomcat-7.0-doc/setup.html
-Ant Docs (No hyperlink directly to setup, click it on the left): http://ant.apache.org/manual/index.html
+Apache Setup:<br>
+http://tomcat.apache.org/tomcat-7.0-doc/setup.html<br>
+Ant Docs (No hyperlink directly to setup, click it on the left):<br>
+http://ant.apache.org/manual/index.html<br>
 
 
 High minded principles section: 
