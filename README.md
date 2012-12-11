@@ -23,7 +23,7 @@ We're using Apache Tomcat 7 as our server environment, with MySQL 5 as a databas
 
 Quick Guides:
 ----------
-(note on doing this on Mac OS 10.8: *make sure* your $JAVA\_HOME variable is set. I assumed that it would be on a mac. Not so. Also, it needs to be set to a different place than the official Apache docs specify (new in 10.8): /System/Library/Frameworks/JavaVM.framework/Home)
+Note on doing this on Mac OS 10.8: *make sure* your $JAVA\_HOME variable is set. I assumed that it would be on a mac. Not so. Also, it needs to be set to a different place than the tutorials specify (new in 10.8): /System/Library/Frameworks/JavaVM.framework/Home
 
 Apache Tomcat 7:<br>
 http://www3.ntu.edu.sg/home/ehchua/programming/howto/Tomcat\_HowTo.html<br>
