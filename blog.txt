@@ -1,0 +1,61 @@
+Advertising common sense says we need a blog. So here are some entries for one (we'll transfer them over to a pretty HTML setting eventually). Feel free to add/edit. Make sure to (back)date your entries.
+
+Rebel More Productively:
+The view from the trenches on code, design, and teams
+
+The Authors:
+
+Keenon Werling:
+I'm a Computer Science Major at Stanford University. I've been passionately making terrible video games since I was in middle school, and realized somewhere along the way that I had fallen in love with programming in a broader sense. I started to branch out into other areas of computer science (commercial AI, web development, app development, network design) my junior year of high school, applied to and got accepted by the best Computer Science school in the country (MIT is a rat trap, and Carnegie Mellon is in Pittsburg), and haven't looked back. My latest project is setting out to make disruptive product design easier and more fun.
+
+[Add yourself]
+
+Blog Entries:
+
+Form, function, and a fanatical approach to load times (and how to optimize the crap out of your design):
+(Dec. 13, 2012)
+
+Every industry works in a box, and the web design industry has a more visible box than most: the browser. Some stunning creativity has gone on to discover ways to stretch the limits of that box (AJAX being an excellent example), but we are all still prisoners of that little window and limited internet bandwidth. Which brings me to my point. It's become popular to claim that "In tech, form doesn't follow function anymore," but that is hugely *wrong*. If anything, they are more closely related than ever, especially on the web. Every extra image means another pair of HTTP headers to be sent and received, another dump of bits, and slower page rendering. It creeps up on you, and before you know it, your page is loading in >1s. :'(. So the rebellious solution? Remove all images larger than 20px x 20px from your design. Use CSS3 and HTML5 instead (they are most definitely up to the task). Then make like Bootstrap, and tile your tiny images into a single medium sized image, compress it, and have your design float that same image, inside small divs within your page with "overflow:none", that effectively clip the image sheet to just the image you wanted.
+
+TODO: Write actual tutorial
+
+Why you should use a real text editor (and how to get started on Vim):
+(Dec. 12, 2012)
+
+The amount of time people spend typing every day is astounding. For most, Word (or LibreOffice, the open source alternative) is plenty, because they *type in a straight line*, from start to finish. We, that rare breed of brave adventurers, who use computers to actually write out code (gasp), do *not type in a straight line*. We edit, revise, grab, cut, paste, duplicate, modify, and do all sorts of other fancy things more often than we type new content. So naturally, those things should be fast, right? We shouldn't have to spend time, thousands of times a day, flailing around with the mouse to get our work done. For those of you who have yet to be introduced to the glory of real text editors, let me be the first to explain that this problem has a solution: Vim.
+
+TODO: Write actual tutorial
+
+Optimization, C vs. Java, and musings on time management:
+(Dec. 11, 2012)
+
+Java, being run by an interpreter, is inherently slower than C and C++. Java is also generally recognized as more "beginner friendly" than C++, and especially C, because of it's safe arrays, useful error messages, and lack of pointers (or at least hiding their presence). Those facts makes the semi-enlightened programmers among us look down on Java as a "noob tool." I don't think that's necessarily correct. If it takes you half the time to write a similar sized program with a comparable number of bugs in Java as it does in C (most of your time in C being spend in GDB sorting out which call is smashing your stack, leading to a nasty null-dereference), then write it in Java! Don't get me wrong, I'm in love with the raw power of C, but spending an extra 2 days working in C to save your server 2ms per request, unless you're working at absolutely massive scale, doesn't make any sense. Computer time is less valuable than human time in most things, and especially on modern machines, where computing power comes extremely cheap, so just write the code the beautiful, human readable way, and let the computer churn for an extra few ms. It will make your code so much more maintainable, bug free, and pleasant to work with.
+
+Hackathons, "sprints," and their nasty organizational demon spawn:
+(Dec. 10, 2012)
+
+Working at Ham in the Fridge in Minneapolis ("Feed your Brand") this summer, we used to joke that we were never quite sure when our "sprints" were over. We had organized our project (building a fairly complex iDevice game) into sprints at the outset, as recommended by the bestselling Rework, but as different people finished different parts at different times, and continued to move forward, the supposedly organized cavalry charge to ship-day turned into a pell-mell, each-man/woman-for-themselves rush to finish todo list items, with many unplanned pauses waiting for one another to finish things that we needed, and little to no central co-ordination. This 37 signals way of organizing projects (i.e. make a long todo list, then do it) is so wildly oversimplified that *it just doesn't work for anything but the simplest (37signals simple, like a todolist manager) software projects.* Anyone who is setting out to innovate, and create something with real value beyond what already exists doesn't know exactly what will be needed at the end of the project at the beginning. But they can tell what will vaguely depend on what else being done already. So a dependency graph would be a much better way to plan projects. A computer could then provide the "load balancing" role and make sure that the charge towards ship day, although proceeding at different speeds in different parts of the project, doesn't end up stepping on any toes.
+
+Fun, passion, and flow states:
+(Dec. 9, 2012)
+
+Making something globally fun is *really, really hard*. Fun is something that modern science still can't definitively pin down, and not for lack of effort: The video game industry alone is worth $78 billion in revenue for 2012, and they would really like to have a formula for the ways people can have fun. But that doesn't stop everyone from having their pet theories, mutated versions of little tidbits picked up here and there. After a few years making video games, I feel qualified to put forward my view on fun: 
+Fun has something to do with flow states. When you're too challenged, you're frustrated, and when you're not challenged enough, you're bored. When the level of challenge is just right, then you can enter "flow state," where the passage of time goes basically unnoticed. This is awesome. People who are passionate about drawing tend to lose themselves for hours in their sketchbooks. People who are passionate about code will lose themselves in their laptops. So how can we make our products fun? That's tricky, because the level of challenge that we feel using an interface that we built to accomplish a task that we understand bears little relation to the level to challenge that the average person feels using that same interface. The trick is testing, and lots of it. Put your parents in front of your interface, and tell them to do something. If they can't figure it out, with zero guidance, then it's time to fix something. Keep the challenge very contained to the places you want to be challenging, and let the interface be easy. Let challenge ramp up, if you can, over time, as people get used to their level of challenge.
+
+Learning from history:
+(Dec. 8, 2012)
+
+There are a lot of war metaphors in business. Starting a small company with big ambitions is a lot like starting a rebellion. You are pitching battle against big, slow moving giants, with speed and passion as your only advantages. Launching a product is a bit like launching an invasion, with strategic positioning and overwhelming tactical skill being the only sure guarantee of victory. There's a reason Sun Tzu's "The Art of War" is a popular business text. 
+With that metaphor in mind, a study of history's greatest mistakes can be very informative, and leads to some interesting advice. Below is my list of historical figures and the piece of advice/quote I think we should take from their experience.
+
+-Hitler: *Always overkill.* Hitler justified his invasion of Russia by saying "We need only kick in the door and the whole rotten structure will come tumbling down." He was wrong. Don't be Hitler.
+
+-Hannibal: *Opportunities come when you're least ready for them, so always have a plan to follow through.* If Hannibal had marched on Rome after Canne, instead of resting, history could have been very different.
+
+-Napoleon: *Use your genius to create opportunities, then hire qualified people to manage them for you.* If Napoleon hadn't been so nepotistic, putting his relatives in positions of authority instead of qualified professionals, the history of Europe could have been very different.
+
+-Vanderbilt: *Trust your first impressions of people.* Vanderbilt famously said "God did me the favor of inscribing every man's character on his face." This trick also works for women.
+
+-Barbarossa: *Reputation is a valuable asset.* By the end of Barbarossa's tenure as the admiral of the Turkish armada in the 1600s, his reputation alone gathered armies, without pay, on the expectation of plunder after successful campaigns. This works for starting companies, it turns out.
+
+-Kaiser Wilhelm II: *Don't threaten if you don't plan to follow through.* It's argued that Germany building a navy to rival Britain's was the primary reason that WW1 happened. This is still more applicable than nuclear deter ant to most business situations. Don't build the navy if you're not planning to use it.
