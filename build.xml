@@ -126,7 +126,7 @@
 
 -->
 
-  <property name="app.name"      value="myapp"/>
+  <property name="app.name"      value="whiteboard"/>
   <property name="app.path"      value="/${app.name}"/>
   <property name="app.version"   value="0.1-dev"/>
   <property name="build.home"    value="${basedir}/build"/>
@@ -305,8 +305,13 @@
       <fileset dir="${src.home}" excludes="**/*.java"/>
     </copy>
 
-  </target>
+    <!-- Copy WAR to apache -->
+    <mkdir dir="${catalina.home}/webapps/${app.name}"/>
+    <copy  todir="${catalina.home}/webapps/${app.name}">
+        <fileset dir="${build.home}"/>
+    </copy>
 
+  </target>
 
 
 <!-- ==================== Dist Target ===================================== -->
