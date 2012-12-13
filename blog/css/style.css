@@ -1,0 +1,82 @@
+.rounded {
+    /* Add a rounded border */
+    border:3px solid #999;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    -opera-border-radius:5px;
+    -khtml-border-radius:5px;
+    border-radius:5px;
+
+    /* Make A Dropshadow for our Boxes */
+    -moz-box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
+}
+
+body {
+    font-family:"Gill Sans / Gill Sans MT", sans-serif;
+}
+
+h2 {
+    font-family:"Courier New", Courier, monospace;
+}
+
+.unselectable {
+    /* Make text unselectable */
+    -webkit-user-select: none; /* Chrome/Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+    /* Rules below not implemented in browsers yet */
+    -o-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.clipped {
+    overflow:hidden;
+}
+
+.hero {
+    background-color: #eee;
+    padding: 20px;
+}
+
+.shadow {
+    /* Make A Dropshadow for our Boxes */
+    -moz-box-shadow: 0px 15px 15px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 15px 15px 15px rgba(0,0,0,0.1);
+    box-shadow: 0px 15px 25px rgba(0,0,0,0.05);
+}
+
+.articleGreen {
+    background-color: #5cce59;
+    /* padding: 0px 15px 10px 15px; */
+}
+
+.articleTitleGreen {
+    background-color: #7ce279;
+}
+
+.articleText {
+    padding: 15px;
+    line-height: 200%;
+    letter-spacing:1px;
+}
+
+.articleRed {
+    background-color: #e27560;
+    /* padding: 0px 15px 10px 15px; */
+}
+
+.articleTitleRed {
+    background-color: #f89987;
+}
+
+.articleBlue {
+    background-color: #0090ff;
+    /* padding: 0px 15px 10px 15px; */
+}
+
+.articleTitleBlue {
+    background-color: #6ab0ff;
+}
