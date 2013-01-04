@@ -23,7 +23,7 @@ NetworkManager.connect = (function(host) {
     NetworkManager.socket.onopen = function () {
         document.getElementById('chatBox').onkeydown = function(event) {
             if (event.keyCode == 13) {
-                NetworkManager.sendMessage();
+                NetworkManager.sendMessage(document.getElementById('chatBox').value);
             }
         };
     };
@@ -39,6 +39,8 @@ NetworkManager.connect = (function(host) {
 
         //Process message.data
 
+        document.getElementById('chatText').innerHTML = message.data;
+
     };
 });
 
@@ -46,9 +48,12 @@ NetworkManager.connect = (function(host) {
 
 NetworkManager.initialize = function() {
     if (window.location.protocol == 'http:') {
-        NetworkManager.connect('ws://' + window.location.host + '/chatbox/chat');
+
+        // Plug the user in to the correct WebSocket, and include the data we used to specify the project
+
+        NetworkManager.connect('ws://' + window.location.host + '/chatbox/chat' + window.location.search);
     } else {
-        NetworkManager.connect('wss://' + window.location.host + '/chatbox/chat');
+        NetworkManager.connect('wss://' + window.location.host + '/chatbox/chat' + window.location.search);
     }
 };
 

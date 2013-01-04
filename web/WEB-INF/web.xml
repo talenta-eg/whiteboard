@@ -172,7 +172,7 @@
 
     <servlet>
       <servlet-name>chat</servlet-name>
-      <servlet-class>websocket.chat.ChatWebSocketServlet</servlet-class>
+      <servlet-class>chatbox.ChatWebSocketServlet</servlet-class>
       <!-- Load this servlet at server startup time -->
       <load-on-startup>5</load-on-startup>
       <!-- Sets Buffer to 20mb instead of 2mb -->

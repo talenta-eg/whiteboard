@@ -138,7 +138,6 @@ public class ProjectServlet extends HttpServlet {
             out.write("<body>");
 
                 out.write("<b>"+projectName+"</b><br>");
-                out.write("<a href='/chatbox/project?id="+projectId+"&accept=no'>Leave Project</a><br>");
                 out.write("Invite Someone:<br>");
                 out.write("<form method='post' action='/chatbox/invite?id="+projectId+"'>");
                     out.write("Email: ");
@@ -179,6 +178,7 @@ public class ProjectServlet extends HttpServlet {
                         out.write("<canvas id='workflow' class='rounded whiteboard' width='600' height='400'></canvas>");
                     out.write("</div>");
                 out.write("</div>");
+                out.write("<a href='/chatbox/project?id="+projectId+"&accept=no'>Quit Project Permanently :(</a><br>");
             out.write("</body>");
         out.write("</html>");
     }
