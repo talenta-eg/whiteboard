@@ -2,71 +2,62 @@
 /////////////////////////// Network Manager ///////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 
-function networkManager() {
-    var Chat = {};
+var NetworkManager = {};
 
-    Chat.socket = null;
+NetworkManager.socket = null;
 
-    Chat.connect = (function(host) {
-        if ('WebSocket' in window) {
-            Chat.socket = new WebSocket(host);
-        } else if ('MozWebSocket' in window) {
-            Chat.socket = new MozWebSocket(host);
-        } else {
-            Console.log('Error: WebSocket is not supported by this browser.');
-            return;
-        }
+//Make the connection call
 
-        Chat.socket.onopen = function () {
-            Console.log('Info: WebSocket connection opened.');
-            document.getElementById('chat').onkeydown = function(event) {
-                if (event.keyCode == 13) {
-                    Chat.sendMessage();
-                }
-            };
+NetworkManager.connect = (function(host) {
+    if ('WebSocket' in window) {
+        NetworkManager.socket = new WebSocket(host);
+    } else if ('MozWebSocket' in window) {
+        NetworkManager.socket = new MozWebSocket(host);
+    } else {
+
+        //Web sockets aren't supported. Time to quit
+
+        return;
+    }
+
+    NetworkManager.socket.onopen = function () {
+        document.getElementById('chatBox').onkeydown = function(event) {
+            if (event.keyCode == 13) {
+                NetworkManager.sendMessage();
+            }
         };
-
-        Chat.socket.onclose = function () {
-            document.getElementById('chat').onkeydown = null;
-            Console.log('Info: WebSocket closed.');
-        };
-
-        Chat.socket.onmessage = function (message) {
-            //Console.log(message.data);
-        };
-    });
-
-    Chat.initialize = function() {
-        if (window.location.protocol == 'http:') {
-            Chat.connect('ws://' + window.location.host + '/examples/websocket/chat');
-        } else {
-            Chat.connect('wss://' + window.location.host + '/examples/websocket/chat');
-        }
     };
 
-    Chat.sendMessage = (function() {
-        var message = document.getElementById('chat').value;
-        if (message != '') {
-            Chat.socket.send(message);
-            document.getElementById('chat').value = '';
-        }
-    });
+    NetworkManager.socket.onclose = function () {
 
-    /*
-    var Console = {};
+        //Clean up if our connection to the server dies
 
-    Console.log = (function(message) {
-        var console = document.getElementById('console');
-        var p = document.createElement('p');
-        p.style.wordWrap = 'break-word';
-        p.innerHTML = message;
-        console.appendChild(p);
-        while (console.childNodes.length > 25) {
-            console.removeChild(console.firstChild);
-        }
-        console.scrollTop = console.scrollHeight;
-    });
-    */
+        document.getElementById('chatBox').onkeydown = null;
+    };
 
-    Chat.initialize();
-}
+    NetworkManager.socket.onmessage = function (message) {
+
+        //Process message.data
+
+    };
+});
+
+//Connect our websocket on the right protocol
+
+NetworkManager.initialize = function() {
+    if (window.location.protocol == 'http:') {
+        NetworkManager.connect('ws://' + window.location.host + '/chatbox/chat');
+    } else {
+        NetworkManager.connect('wss://' + window.location.host + '/chatbox/chat');
+    }
+};
+
+//Manage raw message sending
+
+NetworkManager.sendMessage = function(message) {
+    if (message != '') {
+        NetworkManager.socket.send(message);
+    }
+};
+
+NetworkManager.initialize();

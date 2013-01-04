@@ -23,6 +23,9 @@ We're using Apache Tomcat 7 as our server environment, with MySQL 5 as a databas
 
 Quick Guides:
 ----------
+
+I've gone to the trouble of writing a huge log of tutorials to get you up and running on web software. Check out http://www.rebelmoreproductively.com. They're very much essentials, and if you want a more in depth look, here's a list of tutorials I used to figure all this stuff out.
+
 Note on doing this on Mac OS 10.8: *make sure* your $JAVA\_HOME variable is set. I assumed that it would be on a mac. Not so. Also, it needs to be set to a different place than the tutorials specify (new in 10.8): /System/Library/Frameworks/JavaVM.framework/Home
 
 Apache Tomcat 7:<br>

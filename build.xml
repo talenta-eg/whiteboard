@@ -47,7 +47,7 @@
      set to the current working directory.
 -->
 
-<project name="My Project" default="compile" basedir=".">
+<project name="Rebel More Productively" default="compile" basedir=".">
 
 
 
@@ -126,7 +126,7 @@
 
 -->
 
-  <property name="app.name"      value="whiteboard"/>
+  <property name="app.name"      value="chatbox"/>
   <property name="app.path"      value="/${app.name}"/>
   <property name="app.version"   value="0.1-dev"/>
   <property name="build.home"    value="${basedir}/build"/>
@@ -306,7 +306,12 @@
     </copy>
 
     <!-- Copy WAR to apache -->
-    <mkdir dir="${catalina.home}/webapps/${app.name}"/>
+    <!--<mkdir dir="${catalina.home}/webapps/${app.name}"/>-->
+
+    <!--<copy  todir="${catalina.home}/webapps/${app.name}">
+        <fileset dir="${build.home}"/>
+    </copy>-->
+
     <copy  todir="${catalina.home}/webapps/${app.name}">
         <fileset dir="${build.home}"/>
     </copy>

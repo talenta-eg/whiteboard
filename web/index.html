@@ -9,10 +9,17 @@
     <script src="js/inputManager.js"></script>
     <script src="js/todoItem.js"></script>
     <script src="js/todoManager.js"></script>
+    <script src="js/networkManager.js"></script>
     <script src="js/main.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+    <div>
+        <div id="chatText">
+            <b>Chat box:</b><br>
+        </div>
+        <input type="text" id="chatBox">
+    </div>
     <button onclick="toggle();" class="unselectable">Toggle</button>
     <div style="width:20%;height:500px;position:absolute;right:0px;top:auto;" id="workflowparent">
         <h1 class="unselectable">Todo List:</h1>
@@ -36,12 +43,5 @@
             <canvas id="workflow" class="rounded whiteboard" width="600" height="400"></canvas>
         </div>
     </div>
-    <!--div>
-        <h1 class="unselectable">Chat:</h1>
-        <div class="chatSays rounded">
-            <b>Imaginary User:</b> Hello there. I think we should modify the dependency on the canvas element.
-        </div>
-        <input class="chatbox"></input><button id="sendChat">Send</button>
-    </div-->
 </body>
 </html>
