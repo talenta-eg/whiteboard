@@ -28,13 +28,14 @@ mysql> create table projects (name varchar(100), id integer, creatorId integer);
 Query OK, 0 rows affected (0.49 sec)
 
 mysql> describe projects;
-+-----------+--------------+------+-----+---------+----------------+
-| Field     | Type         | Null | Key | Default | Extra          |
-+-----------+--------------+------+-----+---------+----------------+
-| name      | varchar(100) | YES  |     | NULL    |                |
-| id        | int(11)      | NO   | PRI | NULL    | auto_increment |
-| creatorId | int(11)      | YES  |     | NULL    |                |
-+-----------+--------------+------+-----+---------+----------------+
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| name         | varchar(100) | YES  |     | NULL    |                |
+| id           | int(11)      | NO   | PRI | NULL    | auto_increment |
+| creatorId    | int(11)      | YES  |     | NULL    |                |
+| projectState | longtext     | YES  |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
 3 rows in set (0.07 sec)
 
 mysql> create table userProjects (userId integer, projectId integer);

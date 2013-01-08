@@ -15,6 +15,9 @@ import org.apache.catalina.websocket.StreamInbound;
 import org.apache.catalina.websocket.WebSocketServlet;
 import org.apache.catalina.websocket.WsOutbound;
 
+import org.json.JSONObject;
+import org.json.JSONException;
+
 /**
  * Example web socket servlet for chat.
  */
@@ -23,11 +26,12 @@ public class ChatWebSocketServlet extends WebSocketServlet {
     private final AtomicInteger connectionIds = new AtomicInteger(0);
     private final Set<ChatMessageInbound> connections =
             new CopyOnWriteArraySet<ChatMessageInbound>();
+    private ArrayList<JSONObject> projectState = new ArrayList<JSONObject>();
 
     @Override
     protected StreamInbound createWebSocketInbound(String subProtocol,
             HttpServletRequest request) {
-        System.out.println("New Socket");
+        //System.out.println("New Socket");
 
         //Do database stuff
 
@@ -51,13 +55,63 @@ public class ChatWebSocketServlet extends WebSocketServlet {
 
             userId = SessionManager.getLoggedInUserId(request,conn);
 
-            //Now we should grab the username, for convenience later
 
-            stmt = conn.prepareStatement("select * from users where id = ?");
+            //Let's grab the project authorization, to make sure this user is
+            //authorized
+
+            stmt = conn.prepareStatement("select * from userProjects where userId = ? and projectId = ?");
             stmt.setInt(1,userId);
+            stmt.setInt(2,projectId);
             ResultSet rset = stmt.executeQuery();
             if (rset.next()) {
-                username = rset.getString("username");
+
+                //We're Authorized
+                //Now we should grab the username, for convenience later
+
+                stmt.close();
+                stmt = conn.prepareStatement("select * from users where id = ?");
+                stmt.setInt(1,userId);
+                rset = stmt.executeQuery();
+                if (rset.next()) {
+                    username = rset.getString("username");
+                }
+
+                //And let's grab the project state
+
+                if (projectState.size() > projectId && projectState.get(projectId) != null) {
+
+                    //A project state already exists! Let it be
+
+                }
+                else {
+
+                    //Time for use to create our own project state
+
+                    stmt.close();
+                    stmt = conn.prepareStatement("select * from projects where id = ?");
+                    stmt.setInt(1,projectId);
+                    rset = stmt.executeQuery();
+                    if (rset.next()) {
+                        
+                        //There's some saved project state
+
+                        projectState.ensureCapacity(projectId);
+                        projectState.set(projectId,new JSONObject(rset.getString("projectState")));
+                    }
+                    else {
+
+                        //There's no saved project state, so we create a blank new one
+
+                        projectState.ensureCapacity(projectId);
+                        projectState.set(projectId,new JSONObject());
+                    }
+                }
+                return new ChatMessageInbound(userId,username,projectId); //connectionIds.incrementAndGet()
+            }
+            else {
+
+                //Not authorized
+
             }
         }
         catch (SQLException e) {
@@ -75,7 +129,6 @@ public class ChatWebSocketServlet extends WebSocketServlet {
                 e.printStackTrace();
             }
         }
-        return new ChatMessageInbound(userId,username,projectId); //connectionIds.incrementAndGet()
     }
 
     private final class ChatMessageInbound extends MessageInbound {
@@ -98,9 +151,18 @@ public class ChatWebSocketServlet extends WebSocketServlet {
         @Override
         protected void onOpen(WsOutbound outbound) {
             connections.add(this);
-            String message = String.format("* %s %s",
-                    username, "has joined.");
-            broadcast(message);
+
+            //Alert our presence
+
+            try {
+                JSONObject message = new JSONObject();
+                message.put("type","chat");
+                message.put("username","server");
+                message.put("text",username+" has joined");
+                broadcast(message);
+            }
+            catch (JSONException e) {
+            }
         }
 
         //When the socket is closing, tell the world
@@ -108,9 +170,18 @@ public class ChatWebSocketServlet extends WebSocketServlet {
         @Override
         protected void onClose(int status) {
             connections.remove(this);
-            String message = String.format("* %s %s",
-                    username, "has disconnected.");
-            broadcast(message);
+
+            //Alert our absence
+
+            try {
+                JSONObject message = new JSONObject();
+                message.put("type","chat");
+                message.put("username","server");
+                message.put("text",username+" has disconnected");
+                broadcast(message);
+            }
+            catch (JSONException e) {
+            }
         }
 
         //Dump on binary messages
@@ -125,25 +196,33 @@ public class ChatWebSocketServlet extends WebSocketServlet {
 
         @Override
         protected void onTextMessage(CharBuffer message) throws IOException {
-            System.out.println("Text message "+message);
+            //System.out.println("Text message "+message);
+            try {
 
-            // Never trust the client
-            // TODO: Add a filter to prevent HTML printouts
+                //Parse the JSON, then add the username to it
 
-            String filteredMessage = String.format("%s: %s",
-                    username,message.toString());
-            broadcast(filteredMessage);
+                JSONObject messageObj = new JSONObject(message.toString());
+                messageObj.put("username",username);
+                broadcast(messageObj);
+            }
+            catch (JSONException e) {
+
+                //Client has had an error, or potentially was hacked.
+
+                System.out.println("Invalid JSON");
+            }
         }
 
-        private void broadcast(String message) {
-            System.out.println("CHAT broadcasting "+message);
+        private void broadcast(JSONObject message) {
+            String messageString = message.toString();
+            //System.out.println("CHAT broadcasting "+messageString);
             for (ChatMessageInbound connection : connections) {
 
                 //Only broadcast to people in the same project
 
                 if (connection.projectid == projectid) {
                     try {
-                        CharBuffer buffer = CharBuffer.wrap(message);
+                        CharBuffer buffer = CharBuffer.wrap(messageString);
                         connection.getWsOutbound().writeTextMessage(buffer);
                     } catch (IOException ignore) {
                         // Ignore

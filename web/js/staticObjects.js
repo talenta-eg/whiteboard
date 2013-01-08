@@ -240,6 +240,10 @@ function textBox(canvas,x,y,text) {
         uber.pos.y = y;
         uber.div.style.left = x+"px";
         uber.div.style.top = y+"px";
+
+        //Resize the window if necessary to accomodate the new movement
+
+        uber.canvas.stretchToContent(uber.lowerRight.x,uber.lowerRight.y);
     }
 
     this.onDelete = function() {

@@ -124,6 +124,7 @@ public class ProjectServlet extends HttpServlet {
 
             out.write("<head>");
                 out.write("<script src='js/utilities.js'></script>");
+                out.write("<script src='js/networkManager.js'></script>");
                 out.write("<script src='js/staticObjects.js'></script>");
                 out.write("<script src='js/dynamicAttributes.js'></script>");
                 out.write("<script src='js/dynamicObjects.js'></script>");
@@ -131,7 +132,6 @@ public class ProjectServlet extends HttpServlet {
                 out.write("<script src='js/inputManager.js'></script>");
                 out.write("<script src='js/todoItem.js'></script>");
                 out.write("<script src='js/todoManager.js'></script>");
-                out.write("<script src='js/networkManager.js'></script>");
                 out.write("<script src='js/main.js'></script>");
                 out.write("<link rel='stylesheet' type='text/css' href='/chatbox/css/style.css'>");
             out.write("</head>");

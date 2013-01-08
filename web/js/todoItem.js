@@ -4,6 +4,10 @@
 
 function todoItem(canvas,todoManager,x,y,text) {
 
+    //Add ourselves to the object pool for the network manager
+
+    this.id = NetworkManager.todoItemCreated(this,text,x,y);
+
     //Setup our variables
 
     this.canvas = canvas;
@@ -151,6 +155,10 @@ function todoItem(canvas,todoManager,x,y,text) {
 
         uber.cleanupEditable();
         uber.cleanupDraggable();
+
+        //Tell the NetworkManager to delete us over the network
+
+        NetworkManager.itemDeleted(uber.id);
     }
 
     //Register our delete button
@@ -180,7 +188,7 @@ function todoItem(canvas,todoManager,x,y,text) {
         uber.div.style.left = (x)+"px";
         uber.div.style.top = (y)+"px";
 
-        //Update all of our links
+        //Update all of our links on screen position
 
         uber.updateLinks();
 
@@ -189,11 +197,18 @@ function todoItem(canvas,todoManager,x,y,text) {
 
         uber.lowerRight.x = x+uber.div.offsetWidth;
         uber.lowerRight.y = y+uber.div.offsetHeight;
+
+        //Resize the window if necessary to accomodate the new movement
+
+        uber.canvas.stretchToContent(uber.lowerRight.x,uber.lowerRight.y);
+
+        uber.canvas.draw();
     }
 
-    this.setText = function(text) {
+    this.ignoreNetworkSetText = function(text) {
         uber.text = text;
         uber.textBox.innerHTML = text;
+        uber.todoManager.updateList();
 
         //This is the hidden variable in makeEditable to save what text to use
         //TODO: This is totally a hack, need a cleaner interface with makeEditable
@@ -201,10 +216,18 @@ function todoItem(canvas,todoManager,x,y,text) {
 
         uber.textBox.text = text;
 
-        //Update the lines on the screen, because this often resizes the box
+        //Update the lines on the screen position, because text change often resizes the box
 
         uber.updateLinks();
         uber.canvas.draw();
+    }
+
+    this.setText = function(text) {
+        uber.ignoreNetworkSetText(text);
+
+        //Alert the network of the change
+
+        NetworkManager.itemEdited(uber.id,uber.textBox.text);
     }
     
     //This is the callback that makeEditable gives us, so we can know when the
@@ -215,6 +238,10 @@ function todoItem(canvas,todoManager,x,y,text) {
         if (!editing) {
             uber.text = uber.textBox.innerHTML;
             uber.todoManager.updateList();
+
+            //Tell NetworkManager that we've been edited
+
+            NetworkManager.itemEdited(uber.id,uber.textBox.text);
         }
         //Update the lines on the screen, because this often resizes the box
         uber.updateLinks();
@@ -225,7 +252,7 @@ function todoItem(canvas,todoManager,x,y,text) {
 
     //This gets called to toggle the done state of this item, true->false, false->true
 
-    this.toggleDone = function() {
+    this.ignoreNetworkToggleDone = function() {
         uber.done = !uber.done;
         uber.doneButton.innerHTML = uber.done ? "Undo" : "Done";
         for (var i = 0; i < uber.lowerLinks.length; i++) {
@@ -245,6 +272,16 @@ function todoItem(canvas,todoManager,x,y,text) {
             }
         }
         uber.todoManager.updateList();
+    }
+
+    this.toggleDone = function() {
+        uber.ignoreNetworkToggleDone();
+        if (uber.done) {
+            NetworkManager.todoItemDone(uber.id);
+        }
+        else {
+            NetworkManager.todoItemUndone(uber.id);
+        }
     }
 
     //This sets whether or not the item is available to be done
@@ -490,6 +527,10 @@ function todoItem(canvas,todoManager,x,y,text) {
         if (draggingLink.upperItem && draggingLink.lowerItem) {
             draggingLink.upperItem.addLowerLink(draggingLink);
             draggingLink.lowerItem.addUpperLink(draggingLink);
+
+            //Let NetworkManager know about the new link
+
+            NetworkManager.todoItemDependencyLinked(draggingLink.upperItem.id,draggingLink.lowerItem.id);
             draggingLink = null;
         }
         else {
@@ -620,6 +661,10 @@ function todoLink(canvas) {
         if (uber.upperItem && uber.lowerItem) {
             uber.upperItem.removeLowerLink(uber);
             uber.lowerItem.removeUpperLink(uber);
+
+            //Let NetworkManager know about the our deletion
+
+            NetworkManager.todoItemDependencyRemoved(uber.upperItem.id,uber.lowerItem.id);
         }
         canvas.draw();
         if (uber.deleteButton.parentNode) {

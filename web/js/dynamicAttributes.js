@@ -126,19 +126,22 @@ function makeDraggable(object,div) {
 
         object.setPos(dragged.x,dragged.y);
 
-        //Resize the window if necessary to accomodate the new movement
+        //Tell NetworkManager that we've been moved
 
-        object.canvas.stretchToContent(object.lowerRight.x,object.lowerRight.y);
+        if (object.id != null) NetworkManager.itemMoved(object.id,dragged.x,dragged.y);
     }
 
     //Handle the mouse releasing anywhere on the screen
 
     var handleMouseUp = function(evt) {
-        object.dragging = false;
+        if (object.dragging) {
+            object.dragging = false;
 
-        //Resize the content window to accomodate the new position
+            //Resize the content window to accomodate the new position
 
-        object.canvas.sizeToContent();
+            object.canvas.sizeToContent();
+            if (object.id != null) NetworkManager.sizeToContent(object.id);
+        }
     }
 
     div.addEventListener('mousedown',handleMouseDown,true);
