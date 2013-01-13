@@ -45,7 +45,7 @@ public class CreateProjectServlet extends HttpServlet {
             //Attempts to connect to the database. ("hostname:port/default database", username, password)
 
             conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/geekbase", "root", "password");
+                    "jdbc:mysql://localhost:3306/geekbase", "root", "gizz442a");
 
             //Grab the currently logged in user
 
@@ -110,16 +110,26 @@ public class CreateProjectServlet extends HttpServlet {
 
     public void printError(PrintWriter out) {
         out.write("<html>");
-            out.write("Error: Not logged in<br>");
-            out.write("<a href='/chatbox'>Login</a>");
+            out.write("<head>");
+                out.write("<link rel='stylesheet' type='text/css' href='css/style.css'>");
+            out.write("</head>");
+            out.write("<body>");
+                out.write("Error: Not logged in<br>");
+                out.write("<a href='/'>Login</a>");
+            out.write("</body>");
         out.write("</html>");
     }
 
     public void printSuccess(PrintWriter out, String projectName, int projectId) {
         out.write("<html>");
-            out.write("Project '"+projectName+"' successfully created!<br>");
-            out.write("<a href='/chatbox/project?id="+projectId+"'>Project Page</a><br>");
-            out.write("<a href='/chatbox>Home</a><br>");
+            out.write("<head>");
+                out.write("<link rel='stylesheet' type='text/css' href='css/style.css'>");
+            out.write("</head>");
+            out.write("<body>");
+                out.write("Project '"+projectName+"' successfully created!<br>");
+                out.write("<a href='/project?id="+projectId+"'>Project Page</a><br>");
+                out.write("<a href='/'>Home</a><br>");
+            out.write("</body>");
         out.write("</html>");
     }
 

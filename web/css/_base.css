@@ -1,0 +1,66 @@
+@font-face {
+  font-family: 'Geosans-Light';
+  src: url("../fonts/Geosans/GeosansLight.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Aliquam-Light';
+  src: url("../fonts/Aliquam/Aliquam.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+/* line 18, ../sass/_base.scss */
+body {
+  background-image: url("background.jpg");
+  color: #eee;
+  text-shadow: rgba(0, 0, 0, 0.5) 0.1em 0.1em 1em;
+  font-family: "Aliquam-Light";
+  font-weight: 10;
+  font-size: 1.1em;
+  letter-spacing: 2px; }
+
+/* line 28, ../sass/_base.scss */
+input, textarea {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  font-size: 1.0em;
+  font-family: "Aliquam-Light";
+  letter-spacing: 2px;
+  background-color: #222;
+  padding: 8px;
+  margin: 10px;
+  color: #eee;
+  /* Add a rounded border */
+  border: 1px solid #111;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -opera-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  /* Make A Dropshadow for our Boxes */
+  -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); }
+
+/* line 51, ../sass/_base.scss */
+input:focus {
+  -webkit-box-shadow: 0 0 5px #51cbee;
+  -moz-box-shadow: 0 0 5px #51cbee;
+  box-shadow: 0 0 5px #51cbee;
+  border: 1px solid #51cbee; }
+
+/* line 56, ../sass/_base.scss */
+a:link {
+  color: #5f91ac;
+  text-decoration: none; }
+
+/* line 61, ../sass/_base.scss */
+a:visited {
+  color: #5f91ac; }
+
+/* line 65, ../sass/_base.scss */
+a:hover {
+  color: #76a9c4; }

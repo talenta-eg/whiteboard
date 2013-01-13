@@ -1,0 +1,411 @@
+@import "compass";
+
+@font-face {
+    font-family: 'Geosans-Light';
+    src: url('../fonts/Geosans/GeosansLight.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Aliquam-Light';
+    src: url('../fonts/Aliquam/Aliquam.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Harabara';
+    src: url('../fonts/Harabara/Harabara.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Bebas';
+    src: url('../fonts/Bebas/Bebas.ttf') format('truetype');
+    /*font-weight: light;
+    font-style: normal;*/
+}
+
+@mixin mainfont {
+    font-family: "Aliquam-Light";
+    font-weight: 10;
+    font-size: 1.1em;
+    letter-spacing: 2px;
+    color:#eee;
+    @include text-shadow(rgba(0,0,0,.5) 0.1em 0.1em 1em);
+}
+
+body {
+    background-image:url('background.jpg');
+    @include mainfont;
+}
+
+input, textarea {
+    @include transition(all 0.30s ease-in-out);
+
+    @include mainfont;
+    background-color:#222;
+    padding:8px;
+    margin:10px;
+
+    /* Add a rounded border */
+    border:1px solid #111;
+    @include border-radius(4px);
+
+    /* Make A Dropshadow for our Boxes */
+    @include box-shadow(0 0 5px rgba(0,0,0,0.4), 1px 1px 0px rgba(255,255,255,.2));
+}
+
+input:focus {
+    @include box-shadow(0 0 5px rgba(81, 203, 238, .3));
+    border: 1px solid rgba(81, 203, 238, 1);
+}
+
+input:hover {
+    background-color:#222;
+}
+
+input[readonly="readonly"], input[readonly] {
+    background-color:#333;
+}
+
+input[readonly="readonly"]:focus, input[readonly]:focus {
+    background-color:#333;
+    border:1px solid #111;
+    @include box-shadow(0 0 5px rgba(0,0,0,0.4), 1px 1px 0px rgba(255,255,255,.2));
+}
+
+button {
+    @include mainfont;
+    @include transition(all 0.20s ease-in-out);
+
+    padding: 25px 45px;
+    margin: 10px;
+    border: 2px solid #029dcd;
+    @include border-radius(10px);
+    @include background-image(linear-gradient(#0697c2,#0a6179));
+    background-size:1px 200px;
+}
+
+button:hover {
+    background-position:100px;
+}
+
+button:active {
+    @include background-image(linear-gradient(#00b8f3,#0697c2));
+    background-position:0px;
+}
+
+a:link {
+    @include transition(all 0.20s ease-in-out);
+    color: #5f91ac;
+    text-decoration: none;
+    font-weight: normal;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+a:visited {
+    color: #5f91ac;
+}
+
+a:hover {
+    color: #76a9c4;
+}
+
+a:active {
+}
+
+h1 {
+    font-weight: normal;
+    font-family: "Bebas";
+    font-size:3.7em;
+    margin:0;
+    font-weight: normal;
+    letter-spacing:11px;
+}
+
+h2 {
+    font-weight: normal;
+}
+
+h3 {
+    margin-bottom:0.2em;
+    font-weight: normal;
+    letter-spacing:4px;
+}
+
+hr {
+    border:0;
+    height:1px;
+    margin-top:15px;
+    margin-bottom:25px;
+    width:150px;
+    @include background-image(linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,.75),rgba(0,0,0,0)));
+}
+
+//Logged in
+
+@mixin user-select($select) {
+  -moz-user-select: -moz-#{$select};
+  -khtml-user-select: $select;
+  -webkit-user-select: $select;
+  -o-user-select: $select;
+  user-select: $select;
+}
+
+.tree {
+    color: #56b51b;
+}
+
+.credits {
+    color:rgba(160,160,160,0.5);
+    font-size:0.8em;
+    margin-top:40px;
+    text-align:center;
+}
+
+.projectBox {
+    display:inline-block;
+    @include background-image(radial-gradient(rgba(1,0,0,.15),rgba(0,0,0,.25)));
+    width:200px;
+    height:200px;
+    margin:15px;
+    @include border-radius(10px);
+    @include transition(all 0.20s ease-in-out);
+    @include box-shadow(0 0 5px rgba(0,0,0,0.4), 1px 1px 0px rgba(255,255,255,.2));
+    border: 1px solid rgba(0, 0, 0, 1);
+}
+
+.projectBox:hover {
+    @include background-image(radial-gradient(rgba(0,0,0,.5),rgba(0,0,0,.15)));
+    @include box-shadow(0 0 5px rgba(81, 203, 238, .3));
+    border: 1px solid rgba(81, 203, 238, 1);
+}
+
+.projectBoxTitle {
+    width:182px;
+    padding:10px;
+    margin-left:-1;
+    margin-top:-1;
+    float:left;
+    text-align: center;
+    @include background-image(linear-gradient(#00b8f3,#0697c2));
+}
+
+.projectContainer {
+    width:80%;
+    text-align: center;
+    padding-top:20px;
+    padding-bottom:20px;
+    @include background-image(radial-gradient(rgba(0,0,0,.15),rgba(0,0,0,.05)));
+    position:relative;
+    @include user-select(none);
+}
+
+.projectContainer.todo {
+    padding-top:0px;
+    padding-bottom:0px;
+}
+
+
+.projectBoxContent {
+    padding-top: 10px;
+    float:left;
+    width:100%;
+    text-align: center;
+}
+
+.headerBar {
+    position:relative;
+    //display:inline-block;
+    //height:25px;
+    width:170px;
+    left:60%;
+    padding:5px;
+    text-align: right;
+    background-color:#222;
+}
+
+//Main screen
+
+
+canvas {
+    @include user-select(none);
+    margin:0px;
+    padding:0;
+    -webkit-backface-visibility: hidden;
+}
+
+.todoItemBox {
+    @include background-image(radial-gradient(rgba(1,0,0,.15),rgba(0,0,0,.25)));
+    width:250px;
+    //height:100px;
+    padding-left:15px;
+    padding-right:15px;
+    @include border-radius(10px);
+    @include transition(border 0.20s ease-in-out);
+    @include box-shadow(0 0 5px rgba(0,0,0,0.4), 1px 1px 0px rgba(255,255,255,.2));
+    border: 1px solid rgba(0, 0, 0, 1);
+    &:hover {
+        border: 1px solid rgba(81, 203, 238, 1);
+    }
+    @include user-select(none);
+}
+
+.todoItemBox.done {
+    @include background-image(radial-gradient(rgba(1,0,0,.15),rgba(0,0,0,.05)));
+}
+
+.todoItemBox.cant {
+    @include background-image(radial-gradient(rgba(1,0,0,.35),rgba(0,0,0,.65)));
+}
+
+$todoItemHeight : 25px;
+$todoItemWidth : 100%;
+
+.todoItemTop {
+    width:$todoItemWidth;
+    height:$todoItemHeight;
+    margin-left:0;
+    float:left;
+    opacity: 0;
+    @include background-image(radial-gradient(rgba(15,153,194,.3),rgba(0,0,0,0)));
+    @include transition(opacity 0.20s ease-in-out);
+    background-position:0px $todoItemHeight;
+    background-size:$todoItemWidth $todoItemHeight*2;
+    z-index:1;
+    &:hover {
+        opacity:1;
+    }
+}
+
+.todoItemBottom {
+    width:$todoItemWidth;
+    height:$todoItemHeight;
+    margin-left:0;
+    position:absolute;
+    bottom:0;
+    opacity: 0;
+    @include background-image(radial-gradient(rgba(15,153,194,.3),rgba(0,0,0,0)));
+    @include transition(opacity 0.20s ease-in-out);
+    background-position:0px $todoItemHeight*2;
+    background-size:$todoItemWidth $todoItemHeight*2;
+    z-index:1;
+    &:hover {
+        opacity: 1;
+    }
+}
+
+
+.todoItemContent {
+    height:100%;
+    width:100%;
+    padding-bottom:$todoItemHeight;
+}
+
+.done .todoItemContent {
+    color:#aaa;
+}
+
+.cant .todoItemContent {
+    color:#aaa;
+}
+
+$checkBoxSize:50px;
+
+@mixin todoItemButton {
+    height:$checkBoxSize;
+    width:$checkBoxSize;
+    background-color:(rgba(0,0,0,0));
+    border:0;
+    background-size:$checkBoxSize $checkBoxSize;
+    background-position:0;
+    padding:0;
+    position:absolute;
+    @include border-radius(25px);
+    @include transition(background-image 0.20s ease-in-out);
+    &:hover {
+        background-position:0;
+    }
+    z-index:2;
+}
+
+.todoItemDone {
+    @include background-image(url("../img/checkbox.png"));
+    @include todoItemButton;
+    left:-30px;
+    top:-30px;
+    &:hover {
+        @include background-image(url("../img/checkbox-selected.png"));
+    }
+}
+
+.todoItemDelete {
+    @include background-image(url("../img/deletebox.png"));
+    @include todoItemButton;
+    right:-30px;
+    top:-30px;
+    &:hover {
+        @include background-image(url("../img/deletebox-selected.png"));
+    }
+}
+
+.linkDelete {
+    @include background-image(url("../img/deletebox.png"));
+    @include todoItemButton;
+    margin-left:0px;
+    margin-top:0px;
+    &:hover {
+        @include background-image(url("../img/deletebox-selected.png"));
+    }
+}
+
+.chatContainer {
+    overflow:auto;
+    padding-top:20px;
+    padding-bottom:20px;
+    padding-left:20px;
+    padding-right:20px;
+    height:160px;
+    text-align:left;
+    @include background-image(radial-gradient(rgba(0,0,0,.15),rgba(0,0,0,.05)));
+    width:80%;
+}
+
+.chatContainer .server {
+    color:#60c01c;
+}
+
+.chatContainer .user {
+    color:#0697c2;
+}
+
+.chatContainer hr {
+    border:0;
+    height:1px;
+    margin-top:10px;
+    margin-bottom:10px;
+    width:95%;
+    @include background-image(linear-gradient(left,rgba(0,0,0,.75),rgba(0,0,0,0)));
+}
+
+.instructions {
+    text-align:left;
+    font-size:16px;
+    color:#888;
+    left:30px;
+    top:30px;
+    position:absolute;
+}
+
+textarea {
+    font-size:1em;
+    height:100%;
+    width:100%;
+    margin-left:0px;
+    display:inline-block;
+    resize:none;
+}

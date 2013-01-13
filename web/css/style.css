@@ -1,72 +1,541 @@
-.rounded {
-    /* Add a rounded border */
-    border:3px solid #999;
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
-    -opera-border-radius:5px;
-    -khtml-border-radius:5px;
-    border-radius:5px;
+@font-face {
+  font-family: 'Geosans-Light';
+  src: url("../fonts/Geosans/GeosansLight.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
 
-    /* Make A Dropshadow for our Boxes */
-    -moz-box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
-    -webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
-    box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
-}
+@font-face {
+  font-family: 'Aliquam-Light';
+  src: url("../fonts/Aliquam/Aliquam.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
 
-.unselectable {
-    /* Make text unselectable */
-    -webkit-user-select: none; /* Chrome/Safari */        
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+ */
-    /* Rules below not implemented in browsers yet */
-    -o-user-select: none;
-    user-select: none;
-    white-space: nowrap;
-}
+@font-face {
+  font-family: 'Harabara';
+  src: url("../fonts/Harabara/Harabara.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
 
-.whiteboard {
-    background-color: #ddd;
-}
+@font-face {
+  font-family: 'Bebas';
+  src: url("../fonts/Bebas/Bebas.ttf") format("truetype");
+  /*font-weight: light;
+  font-style: normal;*/ }
 
-.textbox {
-    padding:2px;
-    background-color: #ff7;
-}
+/* line 40, ../sass/style.scss */
+body {
+  background-image: url("background.jpg");
+  font-family: "Aliquam-Light";
+  font-weight: 10;
+  font-size: 1.1em;
+  letter-spacing: 2px;
+  color: #eee;
+  text-shadow: rgba(0, 0, 0, 0.5) 0.1em 0.1em 1em; }
 
-.todo {
-    padding:4px;
-    background-color: #ccc;
-}
+/* line 45, ../sass/style.scss */
+input, textarea {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  font-family: "Aliquam-Light";
+  font-weight: 10;
+  font-size: 1.1em;
+  letter-spacing: 2px;
+  color: #eee;
+  text-shadow: rgba(0, 0, 0, 0.5) 0.1em 0.1em 1em;
+  background-color: #222;
+  padding: 8px;
+  margin: 10px;
+  /* Add a rounded border */
+  border: 1px solid #111111;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  /* Make A Dropshadow for our Boxes */
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4), 1px 1px 0px rgba(255, 255, 255, 0.2);
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4), 1px 1px 0px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4), 1px 1px 0px rgba(255, 255, 255, 0.2); }
 
-.clipped {
-    overflow:hidden;
-}
+/* line 61, ../sass/style.scss */
+input:focus {
+  -webkit-box-shadow: 0 0 5px rgba(81, 203, 238, 0.3);
+  -moz-box-shadow: 0 0 5px rgba(81, 203, 238, 0.3);
+  box-shadow: 0 0 5px rgba(81, 203, 238, 0.3);
+  border: 1px solid #51cbee; }
 
-.todoUpperButton {
-    width:100%;
-    height:25px;
-    position:absolute;
-    left:0px;
-    top:0px;
-}
+/* line 66, ../sass/style.scss */
+input:hover {
+  background-color: #222; }
 
-.todoLowerButton {
-    width:100%;
-    height:25px;
-    position:absolute;
-    left:0px;
-    bottom:0px;
-}
+/* line 70, ../sass/style.scss */
+input[readonly="readonly"], input[readonly] {
+  background-color: #333; }
 
-.todoContentZone {
-    padding-top:25px;
-    padding-bottom:25px;
-}
+/* line 74, ../sass/style.scss */
+input[readonly="readonly"]:focus, input[readonly]:focus {
+  background-color: #333;
+  border: 1px solid #111111;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4), 1px 1px 0px rgba(255, 255, 255, 0.2);
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4), 1px 1px 0px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4), 1px 1px 0px rgba(255, 255, 255, 0.2); }
 
-.chatSays {
-    height:100px;
-    overflow-x:hidden;
-    overflow-y:scroll;
-    width:100%;
-    background-color: #ccc;
-}
+/* line 80, ../sass/style.scss */
+button {
+  font-family: "Aliquam-Light";
+  font-weight: 10;
+  font-size: 1.1em;
+  letter-spacing: 2px;
+  color: #eee;
+  text-shadow: rgba(0, 0, 0, 0.5) 0.1em 0.1em 1em;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  padding: 25px 45px;
+  margin: 10px;
+  border: 2px solid #029dcd;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0697c2), color-stop(100%, #0a6179));
+  background-image: -webkit-linear-gradient(#0697c2, #0a6179);
+  background-image: -moz-linear-gradient(#0697c2, #0a6179);
+  background-image: -o-linear-gradient(#0697c2, #0a6179);
+  background-image: linear-gradient(#0697c2, #0a6179);
+  background-size: 1px 200px; }
+
+/* line 92, ../sass/style.scss */
+button:hover {
+  background-position: 100px; }
+
+/* line 96, ../sass/style.scss */
+button:active {
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #00b8f3), color-stop(100%, #0697c2));
+  background-image: -webkit-linear-gradient(#00b8f3, #0697c2);
+  background-image: -moz-linear-gradient(#00b8f3, #0697c2);
+  background-image: -o-linear-gradient(#00b8f3, #0697c2);
+  background-image: linear-gradient(#00b8f3, #0697c2);
+  background-position: 0px; }
+
+/* line 101, ../sass/style.scss */
+a:link {
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  color: #5f91ac;
+  text-decoration: none;
+  font-weight: normal;
+  white-space: nowrap;
+  display: inline-block; }
+
+/* line 110, ../sass/style.scss */
+a:visited {
+  color: #5f91ac; }
+
+/* line 114, ../sass/style.scss */
+a:hover {
+  color: #76a9c4; }
+
+/* line 121, ../sass/style.scss */
+h1 {
+  font-weight: normal;
+  font-family: "Bebas";
+  font-size: 3.7em;
+  margin: 0;
+  font-weight: normal;
+  letter-spacing: 11px; }
+
+/* line 130, ../sass/style.scss */
+h2 {
+  font-weight: normal; }
+
+/* line 134, ../sass/style.scss */
+h3 {
+  margin-bottom: 0.2em;
+  font-weight: normal;
+  letter-spacing: 4px; }
+
+/* line 140, ../sass/style.scss */
+hr {
+  border: 0;
+  height: 1px;
+  margin-top: 15px;
+  margin-bottom: 25px;
+  width: 150px;
+  background-image: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(50%, rgba(0, 0, 0, 0.75)), color-stop(100%, rgba(0, 0, 0, 0)));
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  background-image: linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0)); }
+
+/* line 159, ../sass/style.scss */
+.tree {
+  color: #56b51b; }
+
+/* line 163, ../sass/style.scss */
+.credits {
+  color: rgba(160, 160, 160, 0.5);
+  font-size: 0.8em;
+  margin-top: 40px;
+  text-align: center; }
+
+/* line 170, ../sass/style.scss */
+.projectBox {
+  display: inline-block;
+  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 100, color-stop(0%, rgba(1, 0, 0, 0.15)), color-stop(100%, rgba(0, 0, 0, 0.25)));
+  background-image: -webkit-radial-gradient(rgba(1, 0, 0, 0.15), rgba(0, 0, 0, 0.25));
+  background-image: -moz-radial-gradient(rgba(1, 0, 0, 0.15), rgba(0, 0, 0, 0.25));
+  background-image: -o-radial-gradient(rgba(1, 0, 0, 0.15), rgba(0, 0, 0, 0.25));
+  background-image: radial-gradient(rgba(1, 0, 0, 0.15), rgba(0, 0, 0, 0.25));
+  width: 200px;
+  height: 200px;
+  margin: 15px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4), 1px 1px 0px rgba(255, 255, 255, 0.2);
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4), 1px 1px 0px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4), 1px 1px 0px rgba(255, 255, 255, 0.2);
+  border: 1px solid black; }
+
+/* line 182, ../sass/style.scss */
+.projectBox:hover {
+  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 100, color-stop(0%, rgba(0, 0, 0, 0.5)), color-stop(100%, rgba(0, 0, 0, 0.15)));
+  background-image: -webkit-radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.15));
+  background-image: -moz-radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.15));
+  background-image: -o-radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.15));
+  background-image: radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.15));
+  -webkit-box-shadow: 0 0 5px rgba(81, 203, 238, 0.3);
+  -moz-box-shadow: 0 0 5px rgba(81, 203, 238, 0.3);
+  box-shadow: 0 0 5px rgba(81, 203, 238, 0.3);
+  border: 1px solid #51cbee; }
+
+/* line 188, ../sass/style.scss */
+.projectBoxTitle {
+  width: 182px;
+  padding: 10px;
+  margin-left: -1;
+  margin-top: -1;
+  float: left;
+  text-align: center;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #00b8f3), color-stop(100%, #0697c2));
+  background-image: -webkit-linear-gradient(#00b8f3, #0697c2);
+  background-image: -moz-linear-gradient(#00b8f3, #0697c2);
+  background-image: -o-linear-gradient(#00b8f3, #0697c2);
+  background-image: linear-gradient(#00b8f3, #0697c2); }
+
+/* line 198, ../sass/style.scss */
+.projectContainer {
+  width: 80%;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 100, color-stop(0%, rgba(0, 0, 0, 0.15)), color-stop(100%, rgba(0, 0, 0, 0.05)));
+  background-image: -webkit-radial-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
+  background-image: -moz-radial-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
+  background-image: -o-radial-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
+  background-image: radial-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
+  position: relative;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  user-select: none; }
+
+/* line 208, ../sass/style.scss */
+.projectContainer.todo {
+  padding-top: 0px;
+  padding-bottom: 0px; }
+
+/* line 214, ../sass/style.scss */
+.projectBoxContent {
+  padding-top: 10px;
+  float: left;
+  width: 100%;
+  text-align: center; }
+
+/* line 221, ../sass/style.scss */
+.headerBar {
+  position: relative;
+  width: 170px;
+  left: 60%;
+  padding: 5px;
+  text-align: right;
+  background-color: #222; }
+
+/* line 235, ../sass/style.scss */
+canvas {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  margin: 0px;
+  padding: 0;
+  -webkit-backface-visibility: hidden; }
+
+/* line 242, ../sass/style.scss */
+.todoItemBox {
+  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 100, color-stop(0%, rgba(1, 0, 0, 0.15)), color-stop(100%, rgba(0, 0, 0, 0.25)));
+  background-image: -webkit-radial-gradient(rgba(1, 0, 0, 0.15), rgba(0, 0, 0, 0.25));
+  background-image: -moz-radial-gradient(rgba(1, 0, 0, 0.15), rgba(0, 0, 0, 0.25));
+  background-image: -o-radial-gradient(rgba(1, 0, 0, 0.15), rgba(0, 0, 0, 0.25));
+  background-image: radial-gradient(rgba(1, 0, 0, 0.15), rgba(0, 0, 0, 0.25));
+  width: 250px;
+  padding-left: 15px;
+  padding-right: 15px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-transition: border 0.2s ease-in-out;
+  -moz-transition: border 0.2s ease-in-out;
+  -o-transition: border 0.2s ease-in-out;
+  transition: border 0.2s ease-in-out;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4), 1px 1px 0px rgba(255, 255, 255, 0.2);
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4), 1px 1px 0px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4), 1px 1px 0px rgba(255, 255, 255, 0.2);
+  border: 1px solid black;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  user-select: none; }
+  /* line 252, ../sass/style.scss */
+  .todoItemBox:hover {
+    border: 1px solid #51cbee; }
+
+/* line 258, ../sass/style.scss */
+.todoItemBox.done {
+  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 100, color-stop(0%, rgba(1, 0, 0, 0.15)), color-stop(100%, rgba(0, 0, 0, 0.05)));
+  background-image: -webkit-radial-gradient(rgba(1, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
+  background-image: -moz-radial-gradient(rgba(1, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
+  background-image: -o-radial-gradient(rgba(1, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
+  background-image: radial-gradient(rgba(1, 0, 0, 0.15), rgba(0, 0, 0, 0.05)); }
+
+/* line 262, ../sass/style.scss */
+.todoItemBox.cant {
+  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 100, color-stop(0%, rgba(1, 0, 0, 0.35)), color-stop(100%, rgba(0, 0, 0, 0.65)));
+  background-image: -webkit-radial-gradient(rgba(1, 0, 0, 0.35), rgba(0, 0, 0, 0.65));
+  background-image: -moz-radial-gradient(rgba(1, 0, 0, 0.35), rgba(0, 0, 0, 0.65));
+  background-image: -o-radial-gradient(rgba(1, 0, 0, 0.35), rgba(0, 0, 0, 0.65));
+  background-image: radial-gradient(rgba(1, 0, 0, 0.35), rgba(0, 0, 0, 0.65)); }
+
+/* line 269, ../sass/style.scss */
+.todoItemTop {
+  width: 100%;
+  height: 25px;
+  margin-left: 0;
+  float: left;
+  opacity: 0;
+  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 100, color-stop(0%, rgba(15, 153, 194, 0.3)), color-stop(100%, rgba(0, 0, 0, 0)));
+  background-image: -webkit-radial-gradient(rgba(15, 153, 194, 0.3), rgba(0, 0, 0, 0));
+  background-image: -moz-radial-gradient(rgba(15, 153, 194, 0.3), rgba(0, 0, 0, 0));
+  background-image: -o-radial-gradient(rgba(15, 153, 194, 0.3), rgba(0, 0, 0, 0));
+  background-image: radial-gradient(rgba(15, 153, 194, 0.3), rgba(0, 0, 0, 0));
+  -webkit-transition: opacity 0.2s ease-in-out;
+  -moz-transition: opacity 0.2s ease-in-out;
+  -o-transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
+  background-position: 0px 25px;
+  background-size: 100% 50px;
+  z-index: 1; }
+  /* line 280, ../sass/style.scss */
+  .todoItemTop:hover {
+    opacity: 1; }
+
+/* line 285, ../sass/style.scss */
+.todoItemBottom {
+  width: 100%;
+  height: 25px;
+  margin-left: 0;
+  position: absolute;
+  bottom: 0;
+  opacity: 0;
+  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 100, color-stop(0%, rgba(15, 153, 194, 0.3)), color-stop(100%, rgba(0, 0, 0, 0)));
+  background-image: -webkit-radial-gradient(rgba(15, 153, 194, 0.3), rgba(0, 0, 0, 0));
+  background-image: -moz-radial-gradient(rgba(15, 153, 194, 0.3), rgba(0, 0, 0, 0));
+  background-image: -o-radial-gradient(rgba(15, 153, 194, 0.3), rgba(0, 0, 0, 0));
+  background-image: radial-gradient(rgba(15, 153, 194, 0.3), rgba(0, 0, 0, 0));
+  -webkit-transition: opacity 0.2s ease-in-out;
+  -moz-transition: opacity 0.2s ease-in-out;
+  -o-transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
+  background-position: 0px 50px;
+  background-size: 100% 50px;
+  z-index: 1; }
+  /* line 297, ../sass/style.scss */
+  .todoItemBottom:hover {
+    opacity: 1; }
+
+/* line 303, ../sass/style.scss */
+.todoItemContent {
+  height: 100%;
+  width: 100%;
+  padding-bottom: 25px; }
+
+/* line 309, ../sass/style.scss */
+.done .todoItemContent {
+  color: #aaa; }
+
+/* line 313, ../sass/style.scss */
+.cant .todoItemContent {
+  color: #aaa; }
+
+/* line 336, ../sass/style.scss */
+.todoItemDone {
+  background-image: url("../img/checkbox.png");
+  height: 50px;
+  width: 50px;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  background-size: 50px 50px;
+  background-position: 0;
+  padding: 0;
+  position: absolute;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+  border-radius: 25px;
+  -webkit-transition: background-image 0.2s ease-in-out;
+  -moz-transition: background-image 0.2s ease-in-out;
+  -o-transition: background-image 0.2s ease-in-out;
+  transition: background-image 0.2s ease-in-out;
+  z-index: 2;
+  left: -30px;
+  top: -30px; }
+  /* line 330, ../sass/style.scss */
+  .todoItemDone:hover {
+    background-position: 0; }
+  /* line 341, ../sass/style.scss */
+  .todoItemDone:hover {
+    background-image: url("../img/checkbox-selected.png"); }
+
+/* line 346, ../sass/style.scss */
+.todoItemDelete {
+  background-image: url("../img/deletebox.png");
+  height: 50px;
+  width: 50px;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  background-size: 50px 50px;
+  background-position: 0;
+  padding: 0;
+  position: absolute;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+  border-radius: 25px;
+  -webkit-transition: background-image 0.2s ease-in-out;
+  -moz-transition: background-image 0.2s ease-in-out;
+  -o-transition: background-image 0.2s ease-in-out;
+  transition: background-image 0.2s ease-in-out;
+  z-index: 2;
+  right: -30px;
+  top: -30px; }
+  /* line 330, ../sass/style.scss */
+  .todoItemDelete:hover {
+    background-position: 0; }
+  /* line 351, ../sass/style.scss */
+  .todoItemDelete:hover {
+    background-image: url("../img/deletebox-selected.png"); }
+
+/* line 356, ../sass/style.scss */
+.linkDelete {
+  background-image: url("../img/deletebox.png");
+  height: 50px;
+  width: 50px;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  background-size: 50px 50px;
+  background-position: 0;
+  padding: 0;
+  position: absolute;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+  border-radius: 25px;
+  -webkit-transition: background-image 0.2s ease-in-out;
+  -moz-transition: background-image 0.2s ease-in-out;
+  -o-transition: background-image 0.2s ease-in-out;
+  transition: background-image 0.2s ease-in-out;
+  z-index: 2;
+  margin-left: 0px;
+  margin-top: 0px; }
+  /* line 330, ../sass/style.scss */
+  .linkDelete:hover {
+    background-position: 0; }
+  /* line 361, ../sass/style.scss */
+  .linkDelete:hover {
+    background-image: url("../img/deletebox-selected.png"); }
+
+/* line 366, ../sass/style.scss */
+.chatContainer {
+  overflow: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 160px;
+  text-align: left;
+  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 100, color-stop(0%, rgba(0, 0, 0, 0.15)), color-stop(100%, rgba(0, 0, 0, 0.05)));
+  background-image: -webkit-radial-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
+  background-image: -moz-radial-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
+  background-image: -o-radial-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
+  background-image: radial-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
+  width: 80%; }
+
+/* line 378, ../sass/style.scss */
+.chatContainer .server {
+  color: #60c01c; }
+
+/* line 382, ../sass/style.scss */
+.chatContainer .user {
+  color: #0697c2; }
+
+/* line 386, ../sass/style.scss */
+.chatContainer hr {
+  border: 0;
+  height: 1px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 95%;
+  background-image: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, rgba(0, 0, 0, 0.75)), color-stop(100%, rgba(0, 0, 0, 0)));
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  background-image: linear-gradient(left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0)); }
+
+/* line 395, ../sass/style.scss */
+.instructions {
+  text-align: left;
+  font-size: 16px;
+  color: #888;
+  left: 30px;
+  top: 30px;
+  position: absolute; }
+
+/* line 404, ../sass/style.scss */
+textarea {
+  font-size: 1em;
+  height: 100%;
+  width: 100%;
+  margin-left: 0px;
+  display: inline-block;
+  resize: none; }

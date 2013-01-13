@@ -33,7 +33,6 @@ function makeEditable(object,div,onDelete,onEditStateChange) {
 
         div.text = textBox.value;
         div.innerHTML = div.text;
-        div.className = "rounded textbox unselectable";
         div.editing = false;
         onEditStateChange(div.editing);
         if (div.text == "") onDelete();
@@ -49,8 +48,7 @@ function makeEditable(object,div,onDelete,onEditStateChange) {
 
         //Make an input box
 
-        div.innerHTML = "<input type='text'/>";
-        div.className = "rounded textbox";
+        div.innerHTML = "<textarea></textarea>";
 
         //Get a handle for it
 

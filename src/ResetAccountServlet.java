@@ -45,7 +45,7 @@ public class ResetAccountServlet extends HttpServlet {
             //Attempts to connect to the database. ("hostname:port/default database", username, password)
 
             conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/geekbase", "root", "password");
+                    "jdbc:mysql://localhost:3306/geekbase", "root", "gizz442a");
 
             if (securityAnswer == null) {
                 stmt = conn.prepareStatement("select * from users where username = ? and email = ?");
@@ -125,40 +125,78 @@ public class ResetAccountServlet extends HttpServlet {
 
     public void printResetAccount(PrintWriter out) {
         out.write("<html>");
-            out.write("<form method='post'>");
-                out.write("Reset your password:<br>");
-                out.write("Enter your username:<br>");
-                out.write("<input type='text' name='username'><br>");
-                out.write("Enter your email:<br>");
-                out.write("<input type='text' name='email'><br>");
-                out.write("<input type='submit'>");
-            out.write("</form>");
+            out.write("<head>");
+                out.write("<link rel='stylesheet' type='text/css' href='css/style.css'>");
+            out.write("</head>");
+            out.write("<body>");
+                out.write("<center>");
+                    out.write("<h1 class='tree' style='margin-top:45px'>Rescue Account</h1>");
+                    out.write("<h3>it's cool. as long as you feel guilty,<br>we'll give you your account back</h3>");
+                    out.write("<img src='img/lock.png' style='margin-top:20px;'>");
+                out.write("</center>");
+                out.write("<div style='margin-left:auto;margin-right:auto;width:270px;'>");
+                    out.write("<form style='margin-top:20px' method='post'>");
+                        out.write("what's your username?<br><input type='text' size='25' name='username'><br>");
+                        out.write("what's your email?<br><input type='text' size='25' name='email'><br>");
+                        out.write("<button style='margin-top:20px'>Give me my account back!</button>");
+                    out.write("</form>");
+                    out.write("<a href='/'>back home</a><br>");
+                    out.write("<br>");
+                out.write("</div>");
+                out.write("<div class='credits'>this app brought to you with love by Keenon Werling &copy; 2013</div>");
+            out.write("</body>");
         out.write("</html>");
     }
 
     public void printResetAccount2(PrintWriter out, String username, String email, String securityQuestion) {
         out.write("<html>");
-            out.write("<form method='post'>");
-                out.write("Reset your password:<br>");
-                out.write("Answer your security question:<br>");
-                out.write(securityQuestion+"<br>");
-                out.write("<input type='text' name='securityAnswer'><br>");
-                out.write("<input type='hidden' name='username' value='"+username+"'>");
-                out.write("<input type='hidden' name='email' value='"+email+"'>");
-                out.write("<input type='submit'>");
-            out.write("</form>");
+            out.write("<head>");
+                out.write("<link rel='stylesheet' type='text/css' href='css/style.css'>");
+            out.write("</head>");
+            out.write("<body>");
+                out.write("<center>");
+                    out.write("<h1 class='tree' style='margin-top:45px'>Rescue Account</h1>");
+                    out.write("<h3>almost there. answer your riddle, and<br>we'll give you your account back</h3>");
+                    out.write("<img src='img/lock.png' style='margin-top:20px;'>");
+                out.write("</center>");
+                out.write("<div style='margin-left:auto;margin-right:auto;width:270px;'>");
+                    out.write("<form style='margin-top:20px' method='post'>");
+                        out.write(securityQuestion+"<br><input type='text' size='25' name='securityAnswer'><br>");
+                        out.write("<input type='hidden' name='username' value='"+username+"'>");
+                        out.write("<input type='hidden' name='email' value='"+email+"'>");
+                        out.write("<button style='margin-top:20px'>Give me my account back!</button>");
+                    out.write("</form>");
+                    out.write("<a href='/'>back home</a><br>");
+                    out.write("<br>");
+                out.write("</div>");
+                out.write("<div class='credits'>this app brought to you with love by Keenon Werling &copy; 2013</div>");
+            out.write("</body>");
         out.write("</html>");
     }
 
     public void printSuccessful(PrintWriter out,String email) {
-        out.write("Password successfully reset. An email has been sent to "+email+"<br>");
-        out.write("<a href='/chatbox'>Login</a>");
+        out.write("<html>");
+            out.write("<head>");
+                out.write("<link rel='stylesheet' type='text/css' href='css/style.css'>");
+            out.write("</head>");
+            out.write("<body>");
+                out.write("Password successfully reset. An email has been sent to "+email+"<br>");
+                out.write("<a href='/'>Login</a>");
+            out.write("</body>");
+        out.write("</html>");
     }
 
     public void printWrongAnswer(PrintWriter out) {
-        out.write("Wrong security answer");
-        out.write("<a href='/chatbox/reset'>Try again</a>");
-        out.write("<a href='/chatbox'>Login</a>");
+        out.write("<html>");
+            out.write("<head>");
+                out.write("<link rel='stylesheet' type='text/css' href='css/style.css'>");
+            out.write("</head>");
+            out.write("<body>");
+                out.write("Wrong security answer");
+                out.write("<a href='/reset'>Try again</a>");
+                out.write("<a href='/'>Login</a>");
+            out.write("</body>");
+        out.write("</html>");
     }
 
 }

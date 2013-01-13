@@ -28,7 +28,7 @@ public class ActivateServlet extends HttpServlet {
             //Attempts to connect to the database. ("hostname:port/default database", username, password)
 
             conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/geekbase", "root", "password");
+                    "jdbc:mysql://localhost:3306/geekbase", "root", "gizz442a");
 
 
             //Grab the user with this activation code

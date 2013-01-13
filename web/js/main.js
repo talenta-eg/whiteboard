@@ -8,40 +8,11 @@ var canvases = new Array();
 
 //Here's the stuff for managing the interface
 
-var whiteboardPage;
 var workflowPage;
 
-var whiteboardCanvas;
 var workflowCanvas;
 
 var todoManager;
-
-var currentLine;
-var currentFlowLine;
-
-//These all get called by inputManager.js
-
-function onWhiteboardMouseDown() {
-}
-
-function onWhiteboardCanvasMouseDown() {
-    currentLine = new complexLine(whiteboardCanvas,whiteboardCanvas.mouseX,whiteboardCanvas.mouseY);
-}
-
-function onWhiteboardCanvasDoubleClick() {
-    new dynamicTextBox(whiteboardCanvas,whiteboardCanvas.mouseX,whiteboardCanvas.mouseY,"Hello");
-}
-
-function onWhiteboardMouseUp() {
-    currentLine = null;
-}
-
-function onWhiteboardMouseMoved() {
-    if (!whiteboardCanvas.containsMouse()) currentLine = null;
-
-    if (currentLine) currentLine.addPoint(whiteboardCanvas.mouseX,whiteboardCanvas.mouseY);
-    whiteboardCanvas.updateCanvas();
-}
 
 function onWorkflowMouseDown() {
 }
@@ -50,7 +21,7 @@ function onWorkflowMouseUp() {
 }
 
 function onWorkflowCanvasDoubleClick() {
-    new todoItem(workflowCanvas,todoManager,workflowCanvas.mouseX,workflowCanvas.mouseY,"Double click me!");
+    new todoItem(workflowCanvas,todoManager,workflowCanvas.mouseX,workflowCanvas.mouseY,"Double click me!",true);
 }
 
 function onWorkflowMouseMoved() {
@@ -76,39 +47,16 @@ function updateWhiteboard() {
 function updateWorkflow() {
 }
 
-//Toggle between the whiteboard context and the planner
-
-function toggle() {
-    if (whiteboardPage.style.display == "none") {
-        whiteboardPage.style.display = "";
-        workflowPage.style.display = "none";
-
-        //Need to update size since been hidden
-
-        whiteboardCanvas.draw();
-    }
-    else {
-        whiteboardPage.style.display = "none";
-        workflowPage.style.display = "";
-
-        //Need to update size since been hidden
-
-        workflowCanvas.draw();
-    }
-}
-
 ///////////////////////////////////////////////////////////////////////////
 ////////////////////////// On Load Flowchart //////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 
 function onLoad() {
 
-    whiteboardPage = document.getElementById("wbpage");
     workflowPage = document.getElementById("wfpage");
 
     //Initialize the canvases
 
-    whiteboardCanvas = new canvas('whiteboard',updateWhiteboard,'whiteboardparent');
     workflowCanvas = new canvas('workflow',updateWorkflow,'workflowparent');
 
     //Initialize the todoManager
@@ -118,12 +66,6 @@ function onLoad() {
     initializeCanvases();
 
     //Hook mouse movements
-
-    whiteboardCanvas.onMouseDown = onWhiteboardMouseDown;
-    whiteboardCanvas.onMouseMoved = onWhiteboardMouseMoved;
-    whiteboardCanvas.onMouseUp = onWhiteboardMouseUp;
-    whiteboardCanvas.onCanvasMouseDown = onWhiteboardCanvasMouseDown;
-    whiteboardCanvas.onCanvasDoubleClick = onWhiteboardCanvasDoubleClick;
 
     workflowCanvas.onMouseDown = onWorkflowMouseDown;
     workflowCanvas.onMouseMoved = onWorkflowMouseMoved;

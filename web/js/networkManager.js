@@ -6,6 +6,7 @@ var NetworkManager = {};
 
 NetworkManager.socket = null;
 NetworkManager.objects = new Array();
+NetworkManager.giveID = 0;
 
 //Make the connection call
 
@@ -24,7 +25,9 @@ NetworkManager.connect = (function(host) {
     NetworkManager.socket.onopen = function () {
         document.getElementById('chatBox').onkeydown = function(event) {
             if (event.keyCode == 13) {
-                NetworkManager.sendMessage({type:"chat",text:document.getElementById('chatBox').value});
+                var message = document.getElementById('chatBox').value;
+                NetworkManager.sendMessage({type:"chat",text:message});
+                document.getElementById('chatBox').value = "";
             }
         };
     };
@@ -36,42 +39,72 @@ NetworkManager.connect = (function(host) {
         document.getElementById('chatBox').onkeydown = null;
     };
 
-    NetworkManager.socket.onmessage = function (message) {
-
-        //Process message.data
-
-        var messageObj = JSON.parse(message.data); //JSON.parse is not in older browsers, but eval() has security holes
+    NetworkManager.processMessage = function (messageObj) {
 
         //Break out behavior based on message content
 
         if (messageObj.type == "chat") {
-            document.getElementById('chatText').innerHTML = "<b>"+messageObj.username+"</b>: "+messageObj.text;
+            var message = "";
+            if (messageObj.username === "server") {
+                message = "<span class='server'>"+messageObj.text+"</span><hr>";
+            }
+            else {
+                message = "<span class='user'>"+messageObj.username+" says:</span> "+messageObj.text+"<hr>";
+            }
+
+            var chatLog = document.getElementById('chatText').innerHTML;
+            var chatText = document.getElementById('chatText');
+            chatText.innerHTML = chatLog+message;
+            chatText.scrollTop = chatText.scrollHeight;
+
         }
-        if (messageObj.type == "todoItemCreated") {
+        else if (messageObj.type == "todoItemCreated") {
             if (NetworkManager.objects.length < messageObj.id || NetworkManager.objects[messageObj.id] == null) {
-                new todoItem(workflowCanvas,todoManager,messageObj.xpos,messageObj.ypos,messageObj.content);
+                var newTodo = new todoItem(workflowCanvas,todoManager,messageObj.xpos,messageObj.ypos,messageObj.content,false);
+
+                //Drop it in the array at a consisten spot across the network
+
+                NetworkManager.objects[messageObj.id]=newTodo;
+                newTodo.id = messageObj.id;
+
+                //Set ourselves up so we don't give conflicting IDs
+
+                if (messageObj.id >= NetworkManager.giveID) {
+                    NetworkManager.giveID = messageObj.id+1;
+                }
+
+                //Deal with being preset as done during updates
+
+                if (messageObj.state === "done") {
+                    newTodo.ignoreNetworkToggleDone();
+                }
             }
         }
-        if (messageObj.type == "itemMoved") {
+        else if (messageObj.type == "minID") {
+            NetworkManager.giveID = messageObj.minID;
+        }
+        else if (messageObj.type == "itemMoved") {
             NetworkManager.objects[messageObj.id].setPos(messageObj.xpos,messageObj.ypos);
         }
-        if (messageObj.type == "itemEdited") {
+        else if (messageObj.type == "itemEdited") {
             NetworkManager.objects[messageObj.id].ignoreNetworkSetText(messageObj.content);
         }
-        if (messageObj.type == "itemDeleted") {
+        else if (messageObj.type == "itemDeleted") {
             if (NetworkManager.objects[messageObj.id] != null) {
                 NetworkManager.objects[messageObj.id].onDelete();
             }
         }
-        if (messageObj.type == "todoItemsDependencyLinked") {
+        else if (messageObj.type == "todoItemsDependencyLinked") {
             var newLink = new todoLink(workflowCanvas);
             newLink.upperItem = NetworkManager.objects[messageObj.upper];
             newLink.lowerItem = NetworkManager.objects[messageObj.lower];
-            newLink.upperItem.addLowerLink(newLink);
-            newLink.lowerItem.addUpperLink(newLink);
-            workflowCanvas.draw();
+            if (newLink.upperItem && newLink.lowerItem) {
+                newLink.upperItem.addLowerLink(newLink);
+                newLink.lowerItem.addUpperLink(newLink);
+                workflowCanvas.draw();
+            }
         }
-        if (messageObj.type == "todoItemsDependencyRemoved") {
+        else if (messageObj.type == "todoItemsDependencyRemoved") {
             var upperItem = NetworkManager.objects[messageObj.upper];
 
             //Search for the relevant link
@@ -81,22 +114,48 @@ NetworkManager.connect = (function(host) {
 
                     //We've found the link
 
-                    upperItem.lowerLinks[i].onDelete();
+                    upperItem.lowerLinks[i].onDelete(true);
                 }
             }
         }
-        if (messageObj.type == "todoItemDone") {
+        else if (messageObj.type == "todoItemDone") {
             if (!NetworkManager.objects[messageObj.id].done) {
-                NetworkManager.objects[messageObj.id].toggleDone();
+                NetworkManager.objects[messageObj.id].ignoreNetworkToggleDone();
             }
         }
-        if (messageObj.type == "todoItemUndone") {
+        else if (messageObj.type == "todoItemUndone") {
             if (NetworkManager.objects[messageObj.id].done) {
-                NetworkManager.objects[messageObj.id].toggleDone();
+                NetworkManager.objects[messageObj.id].ignoreNetworkToggleDone();
             }
         }
-        if (messageObj.type == "sizeToContent") {
+        else if (messageObj.type == "sizeToContent") {
             NetworkManager.objects[messageObj.id].canvas.sizeToContent();
+        }
+    }
+
+    NetworkManager.socket.onmessage = function (message) {
+
+        //Process message.data
+
+        var messageObj = JSON.parse(message.data); //JSON.parse is not in older browsers, but eval() has security holes
+        if (messageObj.type == "update") {
+            for (var i = 0; i < messageObj.update.length; i++) {
+
+                //Process creating all todo items
+
+                if ('type' in messageObj.update[i] && messageObj.update[i].type == "todoItemCreated") {
+                    NetworkManager.processMessage(messageObj.update[i]);
+                }
+
+                //Then link everything
+
+                if ('type' in messageObj.update[i] && messageObj.update[i].type != "todoItemCreated") {
+                    NetworkManager.processMessage(messageObj.update[i]);
+                }
+            }
+        }
+        else {
+            NetworkManager.processMessage(messageObj);
         }
     };
 });
@@ -108,9 +167,9 @@ NetworkManager.initialize = function() {
 
         // Plug the user in to the correct WebSocket, and include the data we used to specify the project
 
-        NetworkManager.connect('ws://' + window.location.host + '/chatbox/chat' + window.location.search);
+        NetworkManager.connect('ws://' + window.location.host + '/chat' + window.location.search);
     } else {
-        NetworkManager.connect('wss://' + window.location.host + '/chatbox/chat' + window.location.search);
+        NetworkManager.connect('wss://' + window.location.host + '/chat' + window.location.search);
     }
 };
 
@@ -128,11 +187,12 @@ NetworkManager.todoItemCreated = function(item,content,xpos,ypos) {
 
     //Drop object into array
 
-    var id = NetworkManager.objects.length;
-    NetworkManager.objects.push(item);
+    var id = NetworkManager.giveID;
+    NetworkManager.objects[id]=(item);
+    NetworkManager.giveID++;
 
     //Create todo item
-
+    
     NetworkManager.sendMessage({type:"todoItemCreated",id:id,content:content,xpos:xpos,ypos:ypos});
     return id;
 }

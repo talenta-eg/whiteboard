@@ -55,7 +55,7 @@ public class CreateAccountServlet extends HttpServlet {
             //Attempts to connect to the database. ("hostname:port/default database", username, password)
 
             conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/geekbase", "root", "password");
+                    "jdbc:mysql://localhost:3306/geekbase", "root", "gizz442a");
 
             //Check if the email already exists
 
@@ -78,7 +78,7 @@ public class CreateAccountServlet extends HttpServlet {
 
                 //Add the new user to the users table
 
-                stmt = conn.prepareStatement("insert into users(username,passwordHash,email,securityQuestion,securityAnswer,activated,activationCode) values (?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                stmt = conn.prepareStatement("insert into users(username,passwordHash,email,securityQuestion,securityAnswer,activated,activationCode) values (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             }
             stmt.setString(1,username);
             stmt.setString(2,hash);
@@ -112,8 +112,16 @@ public class CreateAccountServlet extends HttpServlet {
 
             MailBot mail = new MailBot();
             try {
-                mail.sendMessage(email,"Activation for Graph","Visit <a href='http://www.rebelmoreproductively.com/chatbox/activate?key="+activationHash+"'>here</a> to activate your account!");
-                out.write("Activation email sent");
+                mail.sendMessage(email,"Activation for Graph","Visit <a href='http://www.rebelmoreproductively.com/activate?key="+activationHash+"'>here</a> to activate your account!");
+                out.write("<html>");
+                    out.write("<head>");
+                        out.write("<link rel='stylesheet' type='text/css' href='css/style.css'>");
+                    out.write("</head>");
+                    out.write("<body>");
+                        out.write("Activation email sent.<br>");
+                        out.write("Go <a href='/'>use your account!</a><br>");
+                    out.write("</body>");
+                out.write("</html>");
             }
             catch (Exception e) {
                 out.write("Mail sending didn't work");
@@ -137,27 +145,45 @@ public class CreateAccountServlet extends HttpServlet {
 
     public void printCreateAccount(PrintWriter out,String email) {
         out.write("<html>");
-            out.write("<form method='post'>");
-                out.write("Username:<br>");
-                out.write("<input type='text' name='username'><br>");
-                out.write("Password:<br>");
-                out.write("<input type='password' name='password'><br>");
-                out.write("Copy Password:<br>");
-                out.write("<input type='password' name='passwordCopy'><br>");
-                out.write("Security Question:<br>");
-                out.write("<input type='text' name='securityQuestion'><br>");
-                out.write("Security Answer:<br>");
-                out.write("<input type='text' name='securityAnswer'><br>");
-                out.write("Email:<br>");
-                if (email == null) {
-                    out.write("<input type='text' name='email'><br>");
-                }
-                else {
-                    out.write("<input type='text' name='email' readonly value='"+email+"'><br>");
-                }
-                out.write("<input type='submit'>");
-            out.write("</form>");
-            out.write("<a href='/chatbox'>Login</a>");
+            out.write("<head>");
+                out.write("<link rel='stylesheet' type='text/css' href='css/style.css'>");
+            out.write("</head>");
+            out.write("<body>");
+                out.write("<center>");
+                    out.write("<h1 class='tree' style='margin-top:45px'>Create Account</h1>");
+                    out.write("<h3>you're almost in the club, but first<br>you need to answer a few questions:</h3>");
+                    out.write("<div>");
+                        out.write("<img src='img/grass.png' style='margin-top:10px;'>");
+                        out.write("<div style='position:relative;margin:auto;width:10px;'>");
+                            out.write("<div style='background-color:#0f99c2;height:800px;width:5px;position:absolute;left:85px;top:-70px;z-index:-1;'> </div>");
+                        out.write("</div>");
+                    out.write("</div>");
+                out.write("</center>");
+                out.write("<div style='margin-left:auto;margin-right:auto;width:270px;'>");
+                    out.write("<!--<img src='img/tree.png' style='float:left;margin-right:40px;margin-top:40px;'>-->");
+                    out.write("<form style='margin-top:40px' method='post'>");
+                        out.write("your username?<br><input type='text' name='username' size='25'><br>");
+                        out.write("<hr>");
+                        out.write("your password?<br><input type='password' name='password' size='25'><br>");
+                        out.write("copy password:<br><input type='password' name='passwordCopy' size='25'><br>");
+                        out.write("<hr>");
+                        out.write("your security question?<br><input type='text' name='securityQuestion' size='25'><br>");
+                        out.write("security answer?<br><input type='text' name='securityAnswer' size='25'><br>");
+                        out.write("<hr>");
+                        out.write("your email?<br>");
+                        if (email == null) {
+                            out.write("<input type='text' size='25'>");
+                        }
+                        else {
+                            out.write("<input type='text' size='25' name='email' readonly value='"+email+"'><br>");
+                        }
+                        out.write("<br><br><br><button>Give me an account!</button>");
+                    out.write("</form>");
+                    out.write("<a href='/'>back home</a><br>");
+                    out.write("<br>");
+                out.write("</div>");
+                out.write("<div class='credits'>this app brought to you with love by Keenon Werling &copy; 2013</div>");
+            out.write("</body>");
         out.write("</html>");
     }
 

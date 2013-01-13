@@ -46,7 +46,7 @@ public class ManageServlet extends HttpServlet {
             //Attempts to connect to the database. ("hostname:port/default database", username, password)
 
             conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/geekbase", "root", "password");
+                    "jdbc:mysql://localhost:3306/geekbase", "root", "gizz442a");
 
             //Get currently logged in user
 
@@ -55,7 +55,7 @@ public class ManageServlet extends HttpServlet {
 
                 //Redirect to login
 
-                out.write("<meta http-equiv='REFRESH' content='0;url=/chatbox'>");
+                out.write("<meta http-equiv='REFRESH' content='0;url=/'>");
             }
             else {
 
@@ -98,26 +98,51 @@ public class ManageServlet extends HttpServlet {
 
     public void printManageAccount(PrintWriter out) {
         out.write("<html>");
-            out.write("<form method='post'>");
-                out.write("Change your password:<br>");
-                out.write("Old Password:<br>");
-                out.write("<input type='password' name='oldpassword'><br>");
-                out.write("New Password:<br>");
-                out.write("<input type='password' name='password'><br>");
-                out.write("Copy Password:<br>");
-                out.write("<input type='password' name='passwordCopy'><br>");
-                out.write("<input type='submit'>");
-            out.write("</form>");
-            out.write("<a href='/chatbox'>Login</a>");
+            out.write("<head>");
+                out.write("<link rel='stylesheet' type='text/css' href='css/style.css'>");
+            out.write("</head>");
+            out.write("<body>");
+                out.write("<center>");
+                    out.write("<h1 class='tree' style='margin-top:45px'>Change Password</h1>");
+                    out.write("<h3>always a good idea</h3>");
+                    out.write("<img src='img/lock.png' style='margin-top:20px;'>");
+                out.write("</center>");
+                out.write("<div style='margin-left:auto;margin-right:auto;width:270px;'>");
+                    out.write("<!--<img src='img/tree.png' style='float:left;margin-right:40px;margin-top:40px;'>-->");
+                    out.write("<form style='margin-top:20px' method='post'>");
+                        out.write("what's your old password?<br><input type='password' name='oldpassword' size='25'><br>");
+                        out.write("what's your new password?<br><input type='password' name='password' size='25'><br>");
+                        out.write("copy new password:<br><input type='password' name='passwordCopy' size='25'><br>");
+                        out.write("<button style='margin-top:20px'>Change that password!</button>");
+                    out.write("</form>");
+                    out.write("<a href='/'>back home</a><br>");
+                    out.write("<br>");
+                out.write("</div>");
+                out.write("<div class='credits'>this app brought to you by Keenon Werling &copy; 2013</div>");
+            out.write("</body>");
         out.write("</html>");
     }
 
     public void printSuccessful(PrintWriter out) {
-        out.write("Password successfully updated<br><a href='/chatbox'>Return home</a>");
+        out.write("<html>");
+            out.write("<head>");
+                out.write("<link rel='stylesheet' type='text/css' href='css/style.css'>");
+            out.write("</head>");
+            out.write("<body>");
+                out.write("Password successfully updated<br><a href='/'>Return home</a>");
+            out.write("</body>");
+        out.write("</html>");
     }
 
     public void printWrongPassword(PrintWriter out) {
-        out.write("Wrong password<br><a href='/chatbox/manage'>Try again</a><br><a href='/chatbox'>Return home</a>");
+        out.write("<html>");
+            out.write("<head>");
+                out.write("<link rel='stylesheet' type='text/css' href='css/style.css'>");
+            out.write("</head>");
+            out.write("<body>");
+                out.write("Wrong password<br><a href='/manage'>Try again</a><br><a href='/'>Return home</a>");
+            out.write("</body>");
+        out.write("</html>");
     }
 
 }

@@ -40,7 +40,7 @@ public class InviteServlet extends HttpServlet {
                 //Attempts to connect to the database. ("hostname:port/default database", username, password)
 
                 conn = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/geekbase", "root", "password");
+                        "jdbc:mysql://localhost:3306/geekbase", "root", "gizz442a");
 
                 int userid = SessionManager.getLoggedInUserId(request,conn);
 
@@ -95,7 +95,7 @@ public class InviteServlet extends HttpServlet {
 
                         MailBot mail = new MailBot();
                         try {
-                            mail.sendMessage(email,"Invitation to work on a project in Graph","Visit <a href='http://www.rebelmoreproductively.com/chatbox/createaccount?email="+email+"'>here</a> to create your account!");
+                            mail.sendMessage(email,"Invitation to Todo-Tree","Visit <a href='http://www.rebelmoreproductively.com/createaccount?email="+email+"'>here</a> to create your account!");
                         }
                         catch (Exception e) {
                             out.write("Mail sending didn't work");
@@ -145,15 +145,25 @@ public class InviteServlet extends HttpServlet {
 
     public void printError(PrintWriter out) {
         out.write("<html>");
-            out.write("There was an error getting the project. Perhaps you're not authorized to view it?<br>");
-            out.write("<a href='/chatbox'>Home</a><br>");
+            out.write("<head>");
+                out.write("<link rel='stylesheet' type='text/css' href='css/style.css'>");
+            out.write("</head>");
+            out.write("<body>");
+                out.write("There was an error getting the project. Perhaps you're not authorized to view it?<br>");
+                out.write("<a href='/'>Home</a><br>");
+            out.write("</body>");
         out.write("</html>");
     }
 
     public void printSuccess(PrintWriter out, int projectId) {
         out.write("<html>");
-            out.write("Invitation successfully sent!<br>");
-            out.write("<a href='/chatbox'>Home</a>");
+            out.write("<head>");
+                out.write("<link rel='stylesheet' type='text/css' href='css/style.css'>");
+            out.write("</head>");
+            out.write("<body>");
+                out.write("Invitation successfully sent!<br>");
+                out.write("<a href='/'>Home</a>");
+            out.write("</body>");
         out.write("</html>");
     }
 

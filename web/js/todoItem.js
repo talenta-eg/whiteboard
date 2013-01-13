@@ -2,11 +2,12 @@
 ///////////////////////////// Todo List Nodes /////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 
-function todoItem(canvas,todoManager,x,y,text) {
+function todoItem(canvas,todoManager,x,y,text,tellNetwork) {
 
     //Add ourselves to the object pool for the network manager
-
-    this.id = NetworkManager.todoItemCreated(this,text,x,y);
+    if (tellNetwork) {
+        this.id = NetworkManager.todoItemCreated(this,text,x,y);
+    }
 
     //Setup our variables
 
@@ -19,51 +20,53 @@ function todoItem(canvas,todoManager,x,y,text) {
     this.done = false;
     this.canDo = true;
 
+    /* Todo Item HTML:
+        <div class="todoItemBox" style="position:absolute;left:210px;top:310px">
+            <button class="todoItemDone"></button>
+            <button class="todoItemDelete"></button>
+            <div class="todoItemTop"></div>
+            <div class="todoItemContent">Content here<br>More content. This could get very, very long winded and gross.</div>
+            <div class="todoItemBottom"></div>
+        </div>
+    */
+
     //Create the HTML element that will hold the todo item
 
     this.div = document.createElement('div');
     this.div.style.position = "absolute";
     this.div.style.left = (this.pos.x)+"px";
     this.div.style.top = (this.pos.y)+"px";
-    this.div.className = "rounded todo clipped";
+    this.div.className = "todoItemBox";
 
     //Create the upper button on the element
 
     this.upperButton = document.createElement('div');
-    this.upperButton.style.backgroundColor = "#4f4";
-    this.upperButton.className = "todoUpperButton unselectable";
+    this.upperButton.className = "todoItemTop";
     this.div.appendChild(this.upperButton);
-
-    //Create a padded zone between the buttons
-
-    this.contentZone = document.createElement('div');
-    this.contentZone.className = "todoContentZone";
-    this.div.appendChild(this.contentZone);
 
     //Create the editable text box
 
     this.textBox = document.createElement('div');
-    this.textBox.className = "rounded textbox unselectable";
+    this.textBox.className = "todoItemContent";
     this.textBox.innerHTML = this.text;
-    this.contentZone.appendChild(this.textBox);
+    this.div.appendChild(this.textBox);
     
     //Create the done button
 
     this.doneButton = document.createElement('button');
-    this.doneButton.innerHTML = "Done";
-    this.contentZone.appendChild(this.doneButton);
+    this.doneButton.className = "todoItemDone";
+    this.div.appendChild(this.doneButton);
 
     //Create the delete button
 
     this.deleteButton = document.createElement('button');
-    this.deleteButton.innerHTML = "Delete";
-    this.contentZone.appendChild(this.deleteButton);
+    this.deleteButton.className = "todoItemDelete";
+    this.div.appendChild(this.deleteButton);
 
     //Create the lower button
 
     this.lowerButton = document.createElement('div');
-    this.lowerButton.style.backgroundColor = "#f44";
-    this.lowerButton.className = "todoLowerButton unselectable";
+    this.lowerButton.className = "todoItemBottom";
     this.div.appendChild(this.lowerButton);
 
     canvas.canvasElm.parentNode.appendChild(this.div);
@@ -185,8 +188,25 @@ function todoItem(canvas,todoManager,x,y,text) {
     this.setPos = function(x,y) {
         uber.pos.x = x;
         uber.pos.y = y;
+
         uber.div.style.left = (x)+"px";
         uber.div.style.top = (y)+"px";
+
+        //Force a redraw
+
+        if (uber.doneButton.style.top === "-30px") {
+            uber.doneButton.style.top = "-30.1px";
+        }
+        else {
+            uber.doneButton.style.top = "-30px";
+        }
+
+        if (uber.deleteButton.style.top === "-30px") {
+            uber.deleteButton.style.top = "-30.1px";
+        }
+        else {
+            uber.deleteButton.style.top = "-30px";
+        }
 
         //Update all of our links on screen position
 
@@ -254,7 +274,9 @@ function todoItem(canvas,todoManager,x,y,text) {
 
     this.ignoreNetworkToggleDone = function() {
         uber.done = !uber.done;
-        uber.doneButton.innerHTML = uber.done ? "Undo" : "Done";
+        if (uber.done) {
+            uber.doneButton.style.display = "none";
+        }
         for (var i = 0; i < uber.lowerLinks.length; i++) {
             if (!uber.done && uber.lowerLinks[i].lowerItem.done) {
 
@@ -278,6 +300,7 @@ function todoItem(canvas,todoManager,x,y,text) {
         uber.ignoreNetworkToggleDone();
         if (uber.done) {
             NetworkManager.todoItemDone(uber.id);
+            uber.div.className = "todoItemBox done";
         }
         else {
             NetworkManager.todoItemUndone(uber.id);
@@ -287,15 +310,18 @@ function todoItem(canvas,todoManager,x,y,text) {
     //This sets whether or not the item is available to be done
 
     this.setCanDo = function(canDo) {
-        uber.canDo = canDo;
-        uber.doneButton.style.display= uber.canDo ? "" : "none";
-        uber.todoManager.updateList();
+        if (!uber.done) {
+            uber.canDo = canDo;
+            uber.doneButton.style.display = uber.canDo ? "" : "none";
+            uber.todoManager.updateList();
 
-        //Update the lines on the screen, because changing the can-do status often
-        //resizes the box
+            //Update the lines on the screen, because changing the can-do status often
+            //resizes the box
 
-        uber.updateLinks();
-        uber.canvas.draw();
+            uber.updateLinks();
+            uber.canvas.draw();
+            uber.div.className = "todoItemBox" + (uber.canDo ? "" : " cant");
+        }
     }
 
     //This checks all the dependency links and updates whether or not this item
@@ -601,7 +627,7 @@ function todoLink(canvas) {
     //Create delete button for the link
 
     this.deleteButton = document.createElement('button');
-    this.deleteButton.innerHTML = "Unlink";
+    this.deleteButton.className = "linkDelete";
     this.deleteButton.style.display = "none";
     this.deleteButton.style.position = "absolute";
 
@@ -614,8 +640,8 @@ function todoLink(canvas) {
     var uber = this;
 
     this.updateLine = function() {
-        var buttonHeight = 25;
-        var shadowSize = 5;
+        var buttonHeight = 0;
+        var shadowSize = 0;
 
         //Move our dependency line depending on which end is connected, or both
 
@@ -629,7 +655,7 @@ function todoLink(canvas) {
         }
         if (uber.lowerItem) {
             uber.line.end.x = uber.lowerItem.pos.x + ((uber.lowerItem.div.offsetWidth - shadowSize)/2);
-            uber.line.end.y = uber.lowerItem.pos.y;
+            uber.line.end.y = uber.lowerItem.pos.y - shadowSize;
         }
         else {
             uber.line.end.x = uber.canvas.mouseX;
@@ -656,7 +682,7 @@ function todoLink(canvas) {
         }
     }
 
-    this.onDelete = function() {
+    this.onDelete = function(ignoreNetwork) {
         uber.line.onDelete();
         if (uber.upperItem && uber.lowerItem) {
             uber.upperItem.removeLowerLink(uber);
@@ -664,7 +690,9 @@ function todoLink(canvas) {
 
             //Let NetworkManager know about the our deletion
 
-            NetworkManager.todoItemDependencyRemoved(uber.upperItem.id,uber.lowerItem.id);
+            if (ignoreNetwork) {
+                NetworkManager.todoItemDependencyRemoved(uber.upperItem.id,uber.lowerItem.id);
+            }
         }
         canvas.draw();
         if (uber.deleteButton.parentNode) {

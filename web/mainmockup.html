@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <script src='js/utilities.js'></script>
+        <script src='js/staticObjects.js'></script>
+        <script src='js/dynamicAttributes.js'></script>
+        <script src='js/dynamicObjects.js'></script>
+        <script src='js/drawingManager.js'></script>
+        <script src='js/inputManager.js'></script>
+        <script src='js/todoItem.js'></script>
+        <script src='js/todoManager.js'></script>
+        <script src='js/networkManager.js'></script>
+        <script src='js/main.js'></script>
+        <link rel='stylesheet' type='text/css' href='css/style.css'>
+        <div class='headerBar'>
+            <a href='/'>home</a><br>
+            <a href='/'>logout</a><br>
+        </div>
+    </head>
+    <body>
+        <div style='margin-top:20px;'>
+            <center>
+                <img src='img/tree.png'>
+                <h1 class='tree'>Dorm Joke Project</h1><hr>
+                <h2>Your Project Tree</h2>
+                <div class='projectContainer todo' style='overflow:auto;height:500px;' id='workflowparent'>
+                    <div class='instructions'>
+                        Instructions:<br>
+                        -Double click to add todo items<br>
+                        -Double click text to edit<br>
+                        -Drag to rearrange<br>
+                        -Drag from the top or bottom of a todo to another todo to add a dependency<br>
+                    </div>
+                    <canvas id='workflow' width='600' height='400'></canvas>
+                </div>
+            </center>
+        </div>
+        <center>
+            <hr style='margin-top:30px'>
+            <h2 style='margin-top:10px;'>Your Conversation Wall</h2>
+            <div class='chatContainer' id='chatText'>
+            </div>
+            <input type='text' size='30' id='chatBox'>
+            <button>Post</button>
+        </center>
+        <center>
+            <hr>
+            <h2 style='margin-top:40px;'>Grow the Project</h2>
+            <form>
+            email address to invite:
+            <input type='text' size='30'><br>
+            <button>Send Invitation</button>
+            </form>
+        </center>
+        <div class='credits'>this app brought to you with love by Keenon Werling &copy; 2013</div>
+    </body>
+</html>

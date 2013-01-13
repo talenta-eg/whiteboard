@@ -29,7 +29,7 @@ public class ProjectServlet extends HttpServlet {
                 //Attempts to connect to the database. ("hostname:port/default database", username, password)
 
                 conn = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/geekbase", "root", "password");
+                        "jdbc:mysql://localhost:3306/geekbase", "root", "gizz442a");
 
                 int userid = SessionManager.getLoggedInUserId(request,conn);
                 if (acceptString != null && acceptString.equals("no")) {
@@ -116,15 +116,13 @@ public class ProjectServlet extends HttpServlet {
     }
 
     public void printRedirect(PrintWriter out) {
-        out.write("<html><meta http-equiv='REFRESH' content='0;url=/chatbox'></html>");
+        out.write("<html><meta http-equiv='REFRESH' content='0;url=/'></html>");
     }
 
     public void printProject(PrintWriter out, int projectId, String projectName, boolean creator) {
         out.write("<html>");
-
             out.write("<head>");
                 out.write("<script src='js/utilities.js'></script>");
-                out.write("<script src='js/networkManager.js'></script>");
                 out.write("<script src='js/staticObjects.js'></script>");
                 out.write("<script src='js/dynamicAttributes.js'></script>");
                 out.write("<script src='js/dynamicObjects.js'></script>");
@@ -132,61 +130,63 @@ public class ProjectServlet extends HttpServlet {
                 out.write("<script src='js/inputManager.js'></script>");
                 out.write("<script src='js/todoItem.js'></script>");
                 out.write("<script src='js/todoManager.js'></script>");
+                out.write("<script src='js/networkManager.js'></script>");
                 out.write("<script src='js/main.js'></script>");
-                out.write("<link rel='stylesheet' type='text/css' href='/chatbox/css/style.css'>");
+                out.write("<link rel='stylesheet' type='text/css' href='css/style.css'>");
+                out.write("<div class='headerBar'>");
+                    out.write("<a href='/'>home</a><br>");
+                    out.write("<a href='/logout'>logout</a>");
+                out.write("</div>");
             out.write("</head>");
             out.write("<body>");
-
-                out.write("<b>"+projectName+"</b><br>");
-                out.write("Invite Someone:<br>");
-                out.write("<form method='post' action='/chatbox/invite?id="+projectId+"'>");
-                    out.write("Email: ");
-                    out.write("<input type='text' name='email'><br>");
-                    out.write("<input type='submit'>");
-                out.write("</form>");
-                out.write("<a href='/chatbox'>Home</a><br>");
-                if (creator) {
-                    out.write("You created this project.");
-                }
-
-                out.write("<div>");
-                    out.write("<div id='chatText'>");
-                        out.write("<b>Chat box:</b><br>");
-                    out.write("</div>");
-                    out.write("<input type='text' id='chatBox'>");
+                out.write("<div style='margin-top:20px;'>");
+                    out.write("<center>");
+                        out.write("<img src='img/tree.png'>");
+                        out.write("<h1 class='tree'>"+projectName+"</h1><hr>");
+                        out.write("<h2>Your Project Tree</h2>");
+                        out.write("<div class='projectContainer todo' style='overflow:auto;height:500px;' id='workflowparent'>");
+                            out.write("<div class='instructions'>");
+                                out.write("Instructions:<br>");
+                                out.write("-Double click to add todo items<br>");
+                                out.write("-Double click text to edit<br>");
+                                out.write("-Drag to rearrange<br>");
+                                out.write("-Drag from the top or bottom of a todo to another todo to add a dependency<br>");
+                            out.write("</div>");
+                            out.write("<canvas id='workflow' width='600' height='400'></canvas>");
+                        out.write("</div>");
+                    out.write("</center>");
                 out.write("</div>");
-                out.write("<button onclick='toggle();' class='unselectable'>Toggle</button>");
-                out.write("<div style='width:20%;height:500px;position:absolute;right:0px;top:auto;' id='workflowparent'>");
-                    out.write("<h1 class='unselectable'>Todo List:</h1>");
-                    out.write("<div id='todoList'>");
-                        out.write("<ul>");
-                            out.write("<li class='unselectable'>Do this</li>");
-                        out.write("</ul>");
+                out.write("<center>");
+                    out.write("<hr style='margin-top:30px'>");
+                    out.write("<h2 style='margin-top:10px;'>Your Conversation Wall</h2>");
+                    out.write("<div class='chatContainer' id='chatText'>");
                     out.write("</div>");
-                out.write("</div>");
-                out.write("<div id='wbpage' style='display:none'>");
-                    out.write("<h1 class='unselectable'>Whiteboard:</h1>");
-                    out.write("<h3 class='unselectable'>Share your thoughts</h3>");
-                    out.write("<div style='width:70%;height:700px;overflow:scroll;position:relative' id='whiteboardparent'>");
-                        out.write("<canvas id='whiteboard' class='rounded whiteboard' width='600' height='400'></canvas>");
-                    out.write("</div>");
-                out.write("</div>");
-                out.write("<div id='wfpage'>");
-                    out.write("<h1 class='unselectable'>Workflow:</h1>");
-                    out.write("<h3 class='unselectable'>What needs to get done</h3>");
-                    out.write("<div style='width:70%;height:700px;overflow:scroll;position:relative' id='workflowparent'>");
-                        out.write("<canvas id='workflow' class='rounded whiteboard' width='600' height='400'></canvas>");
-                    out.write("</div>");
-                out.write("</div>");
-                out.write("<a href='/chatbox/project?id="+projectId+"&accept=no'>Quit Project Permanently :(</a><br>");
+                    out.write("<input type='text' size='30' id='chatBox'>");
+                    out.write("<button>Post</button>");
+                out.write("</center>");
+                out.write("<center>");
+                    out.write("<hr>");
+                    out.write("<h2 style='margin-top:40px;'>Grow the Project</h2>");
+                    out.write("<form method='post' action='/invite?id="+projectId+"'>");
+                        out.write("email address to invite:");
+                        out.write("<input type='text' size='30' name='email'><br>");
+                        out.write("<button>Send Invitation</button>");
+                    out.write("</form>");
+                out.write("</center>");
+                out.write("<div class='credits'>this app brought to you with love by Keenon Werling &copy; 2013</div>");
             out.write("</body>");
         out.write("</html>");
     }
 
     public void printError(PrintWriter out) {
         out.write("<html>");
-            out.write("There was an error getting the project. Perhaps you're not authorized to view it?<br>");
-            out.write("<a href='/chatbox'>Home</a><br>");
+            out.write("<head>");
+                out.write("<link rel='stylesheet' type='text/css' href='css/style.css'>");
+            out.write("</head>");
+            out.write("<body>");
+                out.write("There was an error getting the project. Perhaps your session expired? Try logging back in.<br>");
+                out.write("<a href='/'>Home</a><br>");
+            out.write("</body>");
         out.write("</html>");
     }
 }
