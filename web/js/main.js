@@ -75,6 +75,10 @@ function onLoad() {
     //Call other initializations
 
     initializeInput();
+
+    //Get our network plugged in
+    
+    NetworkManager.initialize();
 }
 
 //Add a listener to initialize the page when everything has loaded

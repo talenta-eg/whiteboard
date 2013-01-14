@@ -146,17 +146,30 @@ public class ChatWebSocketServlet extends WebSocketServlet {
         }
 
         public ProjectState(String state) {
-            try {
-                JSONObject total = new JSONObject(state);
-                json = total.getJSONArray("json");
-                map = total.getJSONObject("map");
-            }
-            catch (Exception e) {
+            
+            //Tick this to clear all your projects
+
+            boolean clearProject = false;
+            if (clearProject) {
 
                 //If anything goes wrong, just make a clean object
                 
                 json = new JSONArray();
                 map = new JSONObject();
+            }
+            else {
+                try {
+                    JSONObject total = new JSONObject(state);
+                    json = total.getJSONArray("json");
+                    map = total.getJSONObject("map");
+                }
+                catch (Exception e) {
+
+                    //If anything goes wrong, just make a clean object
+                    
+                    json = new JSONArray();
+                    map = new JSONObject();
+                }
             }
         }
 
@@ -277,10 +290,12 @@ public class ChatWebSocketServlet extends WebSocketServlet {
 
                     String id = message.getInt("upper")+"-"+message.getInt("lower");
                     int index = map.getInt(id);
+                    System.out.println("Unlinking todos "+id+" at index "+index);
 
                     //Null out the item - quick an easy, but not efficient
 
                     json.put(index,new JSONObject());
+                    map.remove(id);
                 }
                 else if (messageType.equals("todoItemDone")) {
 
@@ -484,9 +499,9 @@ public class ChatWebSocketServlet extends WebSocketServlet {
             String messageString = message.toString();
             //System.out.println("CHAT broadcasting "+messageString);
 
-            for (ChatMessageInbound connection : connections) {
+            projectState.get(projectid).onMessage(message);
 
-                projectState.get(projectid).onMessage(message);
+            for (ChatMessageInbound connection : connections) {
 
                 //Only broadcast to people in the same project
 

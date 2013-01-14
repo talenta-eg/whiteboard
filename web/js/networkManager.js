@@ -114,7 +114,7 @@ NetworkManager.connect = (function(host) {
 
                     //We've found the link
 
-                    upperItem.lowerLinks[i].onDelete(true);
+                    upperItem.lowerLinks[i].onDelete(false);
                 }
             }
         }
@@ -252,5 +252,3 @@ NetworkManager.sizeToContent = function(id) {
 
     NetworkManager.sendMessage({type:"sizeToContent",id:id});
 }
-
-NetworkManager.initialize();

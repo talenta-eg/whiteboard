@@ -119,7 +119,11 @@ function todoItem(canvas,todoManager,x,y,text,tellNetwork) {
 
         //Remove the div we created
 
-        canvas.canvasElm.parentNode.removeChild(uber.div);
+        try {
+            canvas.canvasElm.parentNode.removeChild(uber.div);
+        }
+        catch (e) {
+        }
 
         //Delete all links pointing to us
 
@@ -682,7 +686,7 @@ function todoLink(canvas) {
         }
     }
 
-    this.onDelete = function(ignoreNetwork) {
+    this.onDelete = function(tellNetwork) {
         uber.line.onDelete();
         if (uber.upperItem && uber.lowerItem) {
             uber.upperItem.removeLowerLink(uber);
@@ -690,7 +694,7 @@ function todoLink(canvas) {
 
             //Let NetworkManager know about the our deletion
 
-            if (ignoreNetwork) {
+            if (tellNetwork) {
                 NetworkManager.todoItemDependencyRemoved(uber.upperItem.id,uber.lowerItem.id);
             }
         }
@@ -702,5 +706,7 @@ function todoLink(canvas) {
 
     //Register our delete button
     
-    this.deleteButton.onclick = this.onDelete;
+    this.deleteButton.onclick = function() {
+        uber.onDelete(true);
+    }
 }
