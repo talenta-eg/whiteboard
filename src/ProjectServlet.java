@@ -162,7 +162,7 @@ public class ProjectServlet extends HttpServlet {
                     out.write("<div class='chatContainer' id='chatText'>");
                     out.write("</div>");
                     out.write("<input type='text' size='30' id='chatBox'>");
-                    out.write("<button>Post</button>");
+                    out.write("<button onclick='NetworkManager.sendChat()'>Post</button>");
                 out.write("</center>");
                 out.write("<center>");
                     out.write("<hr>");

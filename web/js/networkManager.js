@@ -10,6 +10,12 @@ NetworkManager.giveID = 0;
 
 //Make the connection call
 
+NetworkManager.sendChat = function() {
+    var message = document.getElementById('chatBox').value;
+    NetworkManager.sendMessage({type:"chat",text:message});
+    document.getElementById('chatBox').value = "";
+}
+
 NetworkManager.connect = (function(host) {
     if ('WebSocket' in window) {
         NetworkManager.socket = new WebSocket(host);
@@ -25,9 +31,7 @@ NetworkManager.connect = (function(host) {
     NetworkManager.socket.onopen = function () {
         document.getElementById('chatBox').onkeydown = function(event) {
             if (event.keyCode == 13) {
-                var message = document.getElementById('chatBox').value;
-                NetworkManager.sendMessage({type:"chat",text:message});
-                document.getElementById('chatBox').value = "";
+                NetworkManager.sendChat();
             }
         };
     };
@@ -91,7 +95,7 @@ NetworkManager.connect = (function(host) {
         }
         else if (messageObj.type == "itemDeleted") {
             if (NetworkManager.objects[messageObj.id] != null) {
-                NetworkManager.objects[messageObj.id].onDelete();
+                NetworkManager.objects[messageObj.id].onDelete(false);
             }
         }
         else if (messageObj.type == "todoItemsDependencyLinked") {
