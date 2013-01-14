@@ -105,7 +105,7 @@ function todoItem(canvas,todoManager,x,y,text,tellNetwork) {
 
     var uber = this; 
 
-    this.onDelete = function() {
+    this.onDelete = function(tellNetwork) {
 
         //Remove ourselves only if we are still in the array
 
@@ -165,7 +165,9 @@ function todoItem(canvas,todoManager,x,y,text,tellNetwork) {
 
         //Tell the NetworkManager to delete us over the network
 
-        NetworkManager.itemDeleted(uber.id);
+        if (tellNetwork) {
+            NetworkManager.itemDeleted(uber.id);
+        }
     }
 
     //Register our delete button
