@@ -44,7 +44,6 @@ function makeEditable(object,div,onDelete,onEditStateChange) {
 
         if (div.editing || !object.editable) return;
         div.editing = true;
-        onEditStateChange(div.editing);
 
         //Make an input box
 
@@ -66,6 +65,10 @@ function makeEditable(object,div,onDelete,onEditStateChange) {
 
         textBox.addEventListener('blur',handleLoseFocus,false);
         textBox.addEventListener('keydown',handleKeyDown,false);  
+
+        //Wait to let them know until after we've changed our HTML and box resized
+
+        onEditStateChange(div.editing);
     }
 
     div.addEventListener('dblclick',handleDoubleClick,false);

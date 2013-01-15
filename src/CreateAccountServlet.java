@@ -172,7 +172,7 @@ public class CreateAccountServlet extends HttpServlet {
                         out.write("<hr>");
                         out.write("your email?<br>");
                         if (email == null) {
-                            out.write("<input type='text' size='25'>");
+                            out.write("<input type='text' name='email' size='25'>");
                         }
                         else {
                             out.write("<input type='text' size='25' name='email' readonly value='"+email+"'><br>");

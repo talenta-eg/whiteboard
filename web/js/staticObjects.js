@@ -85,7 +85,11 @@ function bezierLine(canvas,startX,startY,endX,endY,bezierStrength) {
 
         //Sets the color
 
-        ctx.strokeStyle = "#000";
+        ctx.strokeStyle = "#111";
+
+        //Sets the line width
+
+        ctx.lineWidth = 2;
 
         //Renders to the canvas
 

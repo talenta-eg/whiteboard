@@ -201,14 +201,14 @@ function todoItem(canvas,todoManager,x,y,text,tellNetwork) {
         //Force a redraw
 
         if (uber.doneButton.style.top === "-30px") {
-            uber.doneButton.style.top = "-30.1px";
+            uber.doneButton.style.top = "-31px";
         }
         else {
             uber.doneButton.style.top = "-30px";
         }
 
         if (uber.deleteButton.style.top === "-30px") {
-            uber.deleteButton.style.top = "-30.1px";
+            uber.deleteButton.style.top = "-31px";
         }
         else {
             uber.deleteButton.style.top = "-30px";

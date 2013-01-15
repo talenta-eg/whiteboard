@@ -28,10 +28,14 @@
     font-style: normal;*/
 }
 
+
 @mixin mainfont {
-    font-family: "Aliquam-Light";
-    font-weight: 10;
-    font-size: 1.1em;
+    font-family: "Geosans-Light";
+    //-webkit-font-smoothing: subpixel-antialiased;
+    -webkit-font-smoothing: antialiased;
+    //text-rendering: optimizeLegibility;
+    font-weight: normal;
+    font-size: 1.3em;
     letter-spacing: 2px;
     color:#eee;
     @include text-shadow(rgba(0,0,0,.5) 0.1em 0.1em 1em);
@@ -162,7 +166,7 @@ hr {
 
 .credits {
     color:rgba(160,160,160,0.5);
-    font-size:0.8em;
+    font-size:1em;
     margin-top:40px;
     text-align:center;
 }
@@ -237,6 +241,7 @@ canvas {
     margin:0px;
     padding:0;
     -webkit-backface-visibility: hidden;
+    float:left;
 }
 
 .todoItemBox {
@@ -269,7 +274,7 @@ $todoItemWidth : 100%;
 .todoItemTop {
     width:$todoItemWidth;
     height:$todoItemHeight;
-    margin-left:0;
+    margin-left:-15px;
     float:left;
     opacity: 0;
     @include background-image(radial-gradient(rgba(15,153,194,.3),rgba(0,0,0,0)));
@@ -285,7 +290,7 @@ $todoItemWidth : 100%;
 .todoItemBottom {
     width:$todoItemWidth;
     height:$todoItemHeight;
-    margin-left:0;
+    margin-left:-15px;
     position:absolute;
     bottom:0;
     opacity: 0;
@@ -299,11 +304,15 @@ $todoItemWidth : 100%;
     }
 }
 
+$todoItemContentPadding : 40px;
 
 .todoItemContent {
     height:100%;
     width:100%;
-    padding-bottom:$todoItemHeight;
+    font-size:1.2em;
+    margin-top: $todoItemContentPadding;
+    //Margin-bottom must be >= $todoItemHeight
+    margin-bottom:$todoItemContentPadding;
 }
 
 .done .todoItemContent {
@@ -399,10 +408,11 @@ $deleteBoxSize:25px;
 
 .instructions {
     text-align:left;
-    font-size:16px;
-    color:#888;
+    font-size:1.3em;
+    color:#999;
     left:30px;
     top:30px;
+    //z-index:-2;
     position:absolute;
 }
 
