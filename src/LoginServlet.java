@@ -236,7 +236,7 @@ public class LoginServlet extends HttpServlet {
 
                                             out.write("You're invited! Click anywhere to accept");
                                             out.write("<form method='link' action='/project?id="+projects.getInt("projectId")+"&accept=no'>");
-                                            out.write("<button style='padding:10px;margin-top:40px;' href=>Reject, bitch</button>");
+                                            out.write("<button style='padding:10px;margin-top:10px;' href=>Reject, bitch</button>");
                                             out.write("</form>");
                                         }
                                         out.write("</div>");

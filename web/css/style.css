@@ -232,14 +232,15 @@ hr {
   margin-left: -1;
   margin-top: -1;
   float: left;
+  font-size: 1.1em;
   text-align: center;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #00b8f3), color-stop(100%, #0697c2));
-  background-image: -webkit-linear-gradient(#00b8f3, #0697c2);
-  background-image: -moz-linear-gradient(#00b8f3, #0697c2);
-  background-image: -o-linear-gradient(#00b8f3, #0697c2);
-  background-image: linear-gradient(#00b8f3, #0697c2); }
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #00aae1), color-stop(100%, #067495));
+  background-image: -webkit-linear-gradient(#00aae1, #067495);
+  background-image: -moz-linear-gradient(#00aae1, #067495);
+  background-image: -o-linear-gradient(#00aae1, #067495);
+  background-image: linear-gradient(#00aae1, #067495); }
 
-/* line 202, ../sass/style.scss */
+/* line 205, ../sass/style.scss */
 .projectContainer {
   width: 80%;
   text-align: center;
@@ -257,19 +258,21 @@ hr {
   -o-user-select: none;
   user-select: none; }
 
-/* line 212, ../sass/style.scss */
+/* line 215, ../sass/style.scss */
 .projectContainer.todo {
   padding-top: 0px;
   padding-bottom: 0px; }
 
-/* line 218, ../sass/style.scss */
+/* line 221, ../sass/style.scss */
 .projectBoxContent {
   padding-top: 10px;
   float: left;
-  width: 100%;
+  width: 80%;
+  padding-left: 10%;
+  padding-right: 10%;
   text-align: center; }
 
-/* line 225, ../sass/style.scss */
+/* line 230, ../sass/style.scss */
 .headerBar {
   position: relative;
   width: 170px;
@@ -278,7 +281,7 @@ hr {
   text-align: right;
   background-color: #222; }
 
-/* line 239, ../sass/style.scss */
+/* line 244, ../sass/style.scss */
 canvas {
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
@@ -290,7 +293,7 @@ canvas {
   -webkit-backface-visibility: hidden;
   float: left; }
 
-/* line 247, ../sass/style.scss */
+/* line 252, ../sass/style.scss */
 .todoItemBox {
   background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 100, color-stop(0%, rgba(1, 0, 0, 0.15)), color-stop(100%, rgba(0, 0, 0, 0.25)));
   background-image: -webkit-radial-gradient(rgba(1, 0, 0, 0.15), rgba(0, 0, 0, 0.25));
@@ -318,11 +321,11 @@ canvas {
   -webkit-user-select: none;
   -o-user-select: none;
   user-select: none; }
-  /* line 257, ../sass/style.scss */
+  /* line 262, ../sass/style.scss */
   .todoItemBox:hover {
     border: 1px solid #51cbee; }
 
-/* line 263, ../sass/style.scss */
+/* line 268, ../sass/style.scss */
 .todoItemBox.done {
   background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 100, color-stop(0%, rgba(1, 0, 0, 0.15)), color-stop(100%, rgba(0, 0, 0, 0.05)));
   background-image: -webkit-radial-gradient(rgba(1, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
@@ -330,7 +333,7 @@ canvas {
   background-image: -o-radial-gradient(rgba(1, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
   background-image: radial-gradient(rgba(1, 0, 0, 0.15), rgba(0, 0, 0, 0.05)); }
 
-/* line 267, ../sass/style.scss */
+/* line 272, ../sass/style.scss */
 .todoItemBox.cant {
   background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 100, color-stop(0%, rgba(1, 0, 0, 0.35)), color-stop(100%, rgba(0, 0, 0, 0.65)));
   background-image: -webkit-radial-gradient(rgba(1, 0, 0, 0.35), rgba(0, 0, 0, 0.65));
@@ -338,7 +341,7 @@ canvas {
   background-image: -o-radial-gradient(rgba(1, 0, 0, 0.35), rgba(0, 0, 0, 0.65));
   background-image: radial-gradient(rgba(1, 0, 0, 0.35), rgba(0, 0, 0, 0.65)); }
 
-/* line 274, ../sass/style.scss */
+/* line 279, ../sass/style.scss */
 .todoItemTop {
   width: 100%;
   height: 25px;
@@ -357,11 +360,11 @@ canvas {
   background-position: 0px 25px;
   background-size: 100% 50px;
   z-index: 1; }
-  /* line 285, ../sass/style.scss */
+  /* line 290, ../sass/style.scss */
   .todoItemTop:hover {
     opacity: 1; }
 
-/* line 290, ../sass/style.scss */
+/* line 295, ../sass/style.scss */
 .todoItemBottom {
   width: 100%;
   height: 25px;
@@ -381,11 +384,11 @@ canvas {
   background-position: 0px 50px;
   background-size: 100% 50px;
   z-index: 1; }
-  /* line 302, ../sass/style.scss */
+  /* line 307, ../sass/style.scss */
   .todoItemBottom:hover {
     opacity: 1; }
 
-/* line 309, ../sass/style.scss */
+/* line 314, ../sass/style.scss */
 .todoItemContent {
   height: 100%;
   width: 100%;
@@ -393,15 +396,15 @@ canvas {
   margin-top: 40px;
   margin-bottom: 40px; }
 
-/* line 318, ../sass/style.scss */
+/* line 323, ../sass/style.scss */
 .done .todoItemContent {
   color: #aaa; }
 
-/* line 322, ../sass/style.scss */
+/* line 327, ../sass/style.scss */
 .cant .todoItemContent {
   color: #aaa; }
 
-/* line 345, ../sass/style.scss */
+/* line 350, ../sass/style.scss */
 .todoItemDone {
   background-image: url("../img/checkbox.png");
   height: 50px;
@@ -424,14 +427,14 @@ canvas {
   z-index: 2;
   left: -30px;
   top: -30px; }
-  /* line 339, ../sass/style.scss */
+  /* line 344, ../sass/style.scss */
   .todoItemDone:hover {
     background-position: 0; }
-  /* line 350, ../sass/style.scss */
+  /* line 355, ../sass/style.scss */
   .todoItemDone:hover {
     background-image: url("../img/checkbox-selected.png"); }
 
-/* line 355, ../sass/style.scss */
+/* line 360, ../sass/style.scss */
 .todoItemDelete {
   background-image: url("../img/deletebox.png");
   height: 50px;
@@ -454,14 +457,14 @@ canvas {
   z-index: 2;
   right: -30px;
   top: -30px; }
-  /* line 339, ../sass/style.scss */
+  /* line 344, ../sass/style.scss */
   .todoItemDelete:hover {
     background-position: 0; }
-  /* line 360, ../sass/style.scss */
+  /* line 365, ../sass/style.scss */
   .todoItemDelete:hover {
     background-image: url("../img/deletebox-selected.png"); }
 
-/* line 367, ../sass/style.scss */
+/* line 372, ../sass/style.scss */
 .linkDelete {
   background-image: url("../img/deletebox-link.png");
   height: 50px;
@@ -487,14 +490,14 @@ canvas {
   width: 25px;
   height: 25px;
   background-size: 25px 25px; }
-  /* line 339, ../sass/style.scss */
+  /* line 344, ../sass/style.scss */
   .linkDelete:hover {
     background-position: 0; }
-  /* line 375, ../sass/style.scss */
+  /* line 380, ../sass/style.scss */
   .linkDelete:hover {
     background-image: url("../img/deletebox-link-selected.png"); }
 
-/* line 380, ../sass/style.scss */
+/* line 385, ../sass/style.scss */
 .chatContainer {
   overflow: auto;
   padding-top: 20px;
@@ -510,15 +513,15 @@ canvas {
   background-image: radial-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
   width: 80%; }
 
-/* line 392, ../sass/style.scss */
+/* line 397, ../sass/style.scss */
 .chatContainer .server {
   color: #60c01c; }
 
-/* line 396, ../sass/style.scss */
+/* line 401, ../sass/style.scss */
 .chatContainer .user {
   color: #0697c2; }
 
-/* line 400, ../sass/style.scss */
+/* line 405, ../sass/style.scss */
 .chatContainer hr {
   border: 0;
   height: 1px;
@@ -531,7 +534,7 @@ canvas {
   background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
   background-image: linear-gradient(left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0)); }
 
-/* line 409, ../sass/style.scss */
+/* line 414, ../sass/style.scss */
 .instructions {
   text-align: left;
   font-size: 1.3em;
@@ -540,7 +543,7 @@ canvas {
   top: 30px;
   position: absolute; }
 
-/* line 419, ../sass/style.scss */
+/* line 424, ../sass/style.scss */
 textarea {
   font-size: 1em;
   height: 100%;
