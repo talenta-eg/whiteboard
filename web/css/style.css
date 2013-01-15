@@ -455,9 +455,9 @@ canvas {
   .todoItemDelete:hover {
     background-image: url("../img/deletebox-selected.png"); }
 
-/* line 356, ../sass/style.scss */
+/* line 358, ../sass/style.scss */
 .linkDelete {
-  background-image: url("../img/deletebox.png");
+  background-image: url("../img/deletebox-link.png");
   height: 50px;
   width: 50px;
   background-color: rgba(0, 0, 0, 0);
@@ -477,15 +477,18 @@ canvas {
   transition: background-image 0.2s ease-in-out;
   z-index: 2;
   margin-left: 0px;
-  margin-top: 0px; }
+  margin-top: 0px;
+  width: 25px;
+  height: 25px;
+  background-size: 25px 25px; }
   /* line 330, ../sass/style.scss */
   .linkDelete:hover {
     background-position: 0; }
-  /* line 361, ../sass/style.scss */
+  /* line 366, ../sass/style.scss */
   .linkDelete:hover {
-    background-image: url("../img/deletebox-selected.png"); }
+    background-image: url("../img/deletebox-link-selected.png"); }
 
-/* line 366, ../sass/style.scss */
+/* line 371, ../sass/style.scss */
 .chatContainer {
   overflow: auto;
   padding-top: 20px;
@@ -501,15 +504,15 @@ canvas {
   background-image: radial-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
   width: 80%; }
 
-/* line 378, ../sass/style.scss */
+/* line 383, ../sass/style.scss */
 .chatContainer .server {
   color: #60c01c; }
 
-/* line 382, ../sass/style.scss */
+/* line 387, ../sass/style.scss */
 .chatContainer .user {
   color: #0697c2; }
 
-/* line 386, ../sass/style.scss */
+/* line 391, ../sass/style.scss */
 .chatContainer hr {
   border: 0;
   height: 1px;
@@ -522,7 +525,7 @@ canvas {
   background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
   background-image: linear-gradient(left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0)); }
 
-/* line 395, ../sass/style.scss */
+/* line 400, ../sass/style.scss */
 .instructions {
   text-align: left;
   font-size: 16px;
@@ -531,7 +534,7 @@ canvas {
   top: 30px;
   position: absolute; }
 
-/* line 404, ../sass/style.scss */
+/* line 409, ../sass/style.scss */
 textarea {
   font-size: 1em;
   height: 100%;

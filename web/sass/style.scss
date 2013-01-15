@@ -353,13 +353,18 @@ $checkBoxSize:50px;
     }
 }
 
+$deleteBoxSize:25px;
+
 .linkDelete {
-    @include background-image(url("../img/deletebox.png"));
+    @include background-image(url("../img/deletebox-link.png"));
     @include todoItemButton;
     margin-left:0px;
     margin-top:0px;
+    width:$deleteBoxSize;
+    height:$deleteBoxSize;
+    background-size:$deleteBoxSize $deleteBoxSize;
     &:hover {
-        @include background-image(url("../img/deletebox-selected.png"));
+        @include background-image(url("../img/deletebox-link-selected.png"));
     }
 }
 
