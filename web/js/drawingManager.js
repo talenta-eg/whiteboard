@@ -46,7 +46,7 @@ function canvas(id,update) {
     this.contentSize = new point(0,0);
     this.absoluteContentSize = new point(0,0);
 
-    this.contentSizePadding = new point(50,50);
+    this.contentSizePadding = new point(400,400);
 
     this.size = elementSpace(this.canvasElm);
     this.size.x -= this.scrollBarSize;
