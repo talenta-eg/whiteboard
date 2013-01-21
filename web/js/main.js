@@ -53,6 +53,8 @@ function updateWorkflow() {
 
 function onLoad() {
 
+    //Hello there Git. I know you see me.
+
     workflowPage = document.getElementById("wfpage");
 
     //Initialize the canvases
