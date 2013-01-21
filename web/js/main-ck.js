@@ -1,5 +1,0 @@
-//
-//********** HTML5 CANVAS OF AWESOMENESS *************
-//******************** by kw *************************
-//
-function onWorkflowMouseDown(){}function onWorkflowMouseUp(){}function onWorkflowCanvasDoubleClick(){new todoItem(workflowCanvas,todoManager,workflowCanvas.mouseX,workflowCanvas.mouseY,"Double click me!",!0)}function onWorkflowMouseMoved(){workflowCanvas.updateCanvas()}function onKeyDown(e){}function onKeyUp(e){}function initializeCanvases(){}function updateWhiteboard(){}function updateWorkflow(){}function onLoad(){workflowPage=document.getElementById("wfpage");workflowCanvas=new canvas("workflow",updateWorkflow,"workflowparent");todoManager=new todoManager;initializeCanvases();workflowCanvas.onMouseDown=onWorkflowMouseDown;workflowCanvas.onMouseMoved=onWorkflowMouseMoved;workflowCanvas.onMouseUp=onWorkflowMouseUp;workflowCanvas.onCanvasDoubleClick=onWorkflowCanvasDoubleClick;initializeInput()}var keys=[],canvases=new Array,workflowPage,workflowCanvas,todoManager;document.addEventListener("DOMContentLoaded",onLoad,!1);
