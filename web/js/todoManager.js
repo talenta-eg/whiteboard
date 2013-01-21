@@ -21,6 +21,9 @@ function todoManager() {
         for (var i = 0; i < uber.todoItems.length; i++) {
             if (uber.todoItems[i].canDo && !uber.todoItems[i].done) {
             }
+            if (uber.todoItems[i].done) {
+                uber.todoItems[i].div.className = "todoItemBox done";
+            }
         }
     }
 
