@@ -20,7 +20,12 @@ function onWorkflowMouseDown() {
 function onWorkflowMouseUp() {
 }
 
+function hideInstructions() {
+    document.getElementById("instructions").style.display = "none";
+}
+
 function onWorkflowCanvasDoubleClick() {
+    hideInstructions();
     new todoItem(workflowCanvas,todoManager,workflowCanvas.mouseX,workflowCanvas.mouseY,"Double click me!",true);
 }
 
