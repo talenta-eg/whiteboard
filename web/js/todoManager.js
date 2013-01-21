@@ -12,6 +12,10 @@ function todoManager() {
 
         //Make the list element
 
+        if (uber.todoItems.length > 0) {
+            hideInstructions();
+        }
+
         for (var i = 0; i < uber.todoItems.length; i++) {
             if (uber.todoItems[i].canDo && !uber.todoItems[i].done) {
             }
