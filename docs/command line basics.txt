@@ -1,0 +1,13 @@
+ant -- rebuild server with your changes and make it go live
+
+git pull origin master -- pull up all the changes from github (get in sync with other people)
+
+When you make a change, do:
+1. git add file/you/modified.js 
+2. git commit 
+3. git push origin master (send it to github)
+4. if you want the changes to go live, type "ant" (in the whiteboard directory)
+
+To search a directory's files for a string (say "example blah") you would do:
+grep "example blah" *
+
