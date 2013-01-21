@@ -14,6 +14,8 @@ function todoManager() {
 
         if (uber.todoItems.length > 0) {
             hideInstructions();
+        } else {
+            showInstructions();
         }
 
         for (var i = 0; i < uber.todoItems.length; i++) {
