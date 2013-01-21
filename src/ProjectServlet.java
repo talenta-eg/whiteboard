@@ -145,7 +145,7 @@ public class ProjectServlet extends HttpServlet {
                         out.write("<h1 class='tree'>"+projectName+"</h1><hr>");
                         out.write("<h2>Your Project Tree</h2>");
                         out.write("<div class='projectContainer todo' style='overflow:auto;height:500px;' id='workflowparent'>");
-                            out.write("<div class='instructions'>");
+                            out.write("<div class='instructions' id='instructions'>");
                                 out.write("Instructions:<br>");
                                 out.write("-Double click to add todo items<br>");
                                 out.write("-Double click text to edit<br>");
