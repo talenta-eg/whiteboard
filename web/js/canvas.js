@@ -45,7 +45,7 @@ Canvas.addResize = function(canvas) {
 
     //Initialize our size
 
-    canvas.setSize(elementSpace(canvas.canvasElm));
+    canvas.setSize(Utilities.elementSpace(canvas.canvasElm));
 }
 
 /**
@@ -100,7 +100,7 @@ Canvas.addInput = function(canvas) {
             scrollSum.x += document.documentElement.scrollLeft;
             scrollSum.y += document.documentElement.scrollTop;
         }
-        canvas.position = elementPosition(canvas.canvasElm);
+        canvas.position = Utilities.elementPosition(canvas.canvasElm);
         canvas.mouseX = (evt.clientX)-(canvas.position.x)+scrollSum.x;
         canvas.mouseY = (evt.clientY)-(canvas.position.y)+scrollSum.y;
     }
