@@ -25,7 +25,7 @@ function showInstructions() {
 
 function onWorkflowCanvasDoubleClick() {
     hideInstructions();
-    new todoItem(workflowCanvas,todoManager,workflowCanvas.mouseX,workflowCanvas.mouseY,"Double click me!",true);
+    new TodoItem.basicTodoItem(workflowCanvas,todoManager,workflowCanvas.mouseX,workflowCanvas.mouseY,"Double click me!",true);
 }
 
 function onWorkflowMouseMoved() {

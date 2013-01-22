@@ -30,8 +30,7 @@ function makeEditable(object,div,onDelete,onEditStateChange) {
         textBox.removeEventListener('keydown',handleKeyDown,false);  
 
         //Change HTML back
-
-        div.text = textBox.value;
+div.text = textBox.value;
         div.innerHTML = div.text;
         div.editing = false;
         onEditStateChange(div.editing);
@@ -96,9 +95,7 @@ function makeDraggable(object,div) {
     //Handle the user clicking on the div
 
     var handleMouseDown = function(evt) {
-        console.log("Hello");
         if (!object.draggable) return;
-        console.log("Draggabl");
         object.dragging = true;
         object.dragStart = new point(object.pos.x,object.pos.y);
         object.dragMouseStart = new point(object.canvas.mouseX,object.canvas.mouseY);
