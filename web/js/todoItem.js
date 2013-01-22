@@ -110,7 +110,10 @@ function todoItem(canvas,todoManager,x,y,text,tellNetwork) {
         //Remove ourselves only if we are still in the array
 
         var index = canvas.renderObjects.indexOf(uber);
-        if (index != -1) canvas.renderObjects.splice(index, 1);
+        if (index != -1) {
+            if (!window.confirm("Really delete?")) return;
+            canvas.renderObjects.splice(index, 1);
+        }
 
         //Remove ourselves only if we are still in the array
 
