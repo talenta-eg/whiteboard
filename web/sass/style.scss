@@ -266,6 +266,13 @@ canvas {
     @include user-select(none);
 }
 
+ul.noBullets {
+    list-style-type:none;
+    padding:0;
+    margin:0;
+    text-align:left;
+}
+
 .todoItemBox.done {
     @include background-image(radial-gradient(rgba(1,0,0,.15),rgba(0,0,0,.05)));
     color:#808080;
