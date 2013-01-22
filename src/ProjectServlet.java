@@ -126,8 +126,7 @@ public class ProjectServlet extends HttpServlet {
                 out.write("<script src='js/staticObjects.js'></script>");
                 out.write("<script src='js/dynamicAttributes.js'></script>");
                 out.write("<script src='js/dynamicObjects.js'></script>");
-                out.write("<script src='js/drawingManager.js'></script>");
-                out.write("<script src='js/inputManager.js'></script>");
+                out.write("<script src='js/canvas.js'></script>");
                 out.write("<script src='js/todoItem.js'></script>");
                 out.write("<script src='js/todoManager.js'></script>");
                 out.write("<script src='js/networkManager.js'></script>");

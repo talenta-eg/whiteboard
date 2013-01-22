@@ -198,8 +198,8 @@ function todoItem(canvas,todoManager,x,y,text,tellNetwork) {
         uber.pos.x = x;
         uber.pos.y = y;
 
-        uber.div.style.left = (x)+"px";
-        uber.div.style.top = (y)+"px";
+        uber.div.style.left = x+"px";
+        uber.div.style.top = y+"px";
 
         //Force a redraw
 

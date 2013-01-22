@@ -294,7 +294,7 @@ canvas {
   -webkit-backface-visibility: hidden;
   float: left; }
 
-/* line 253, ../sass/style.scss */
+/* line 254, ../sass/style.scss */
 .todoItemBox {
   background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 100, color-stop(0%, rgba(1, 0, 0, 0.15)), color-stop(100%, rgba(0, 0, 0, 0.25)));
   background-image: -webkit-radial-gradient(rgba(1, 0, 0, 0.15), rgba(0, 0, 0, 0.25));
@@ -322,18 +322,18 @@ canvas {
   -webkit-user-select: none;
   -o-user-select: none;
   user-select: none; }
-  /* line 263, ../sass/style.scss */
+  /* line 264, ../sass/style.scss */
   .todoItemBox:hover {
     border: 1px solid #51cbee; }
 
-/* line 269, ../sass/style.scss */
+/* line 270, ../sass/style.scss */
 ul.noBullets {
   list-style-type: none;
   padding: 0;
   margin: 0;
   text-align: left; }
 
-/* line 276, ../sass/style.scss */
+/* line 277, ../sass/style.scss */
 .todoItemBox.done {
   background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 100, color-stop(0%, rgba(1, 0, 0, 0.15)), color-stop(100%, rgba(0, 0, 0, 0.05)));
   background-image: -webkit-radial-gradient(rgba(1, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
@@ -342,7 +342,7 @@ ul.noBullets {
   background-image: radial-gradient(rgba(1, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
   color: #808080; }
 
-/* line 281, ../sass/style.scss */
+/* line 282, ../sass/style.scss */
 .todoItemBox.cant {
   background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 100, color-stop(0%, rgba(1, 0, 0, 0.35)), color-stop(100%, rgba(0, 0, 0, 0.65)));
   background-image: -webkit-radial-gradient(rgba(1, 0, 0, 0.35), rgba(0, 0, 0, 0.65));
@@ -350,7 +350,7 @@ ul.noBullets {
   background-image: -o-radial-gradient(rgba(1, 0, 0, 0.35), rgba(0, 0, 0, 0.65));
   background-image: radial-gradient(rgba(1, 0, 0, 0.35), rgba(0, 0, 0, 0.65)); }
 
-/* line 288, ../sass/style.scss */
+/* line 289, ../sass/style.scss */
 .todoItemTop {
   width: 100%;
   height: 25px;
@@ -369,11 +369,11 @@ ul.noBullets {
   background-position: 0px 25px;
   background-size: 100% 50px;
   z-index: 1; }
-  /* line 299, ../sass/style.scss */
+  /* line 300, ../sass/style.scss */
   .todoItemTop:hover {
     opacity: 1; }
 
-/* line 304, ../sass/style.scss */
+/* line 305, ../sass/style.scss */
 .todoItemBottom {
   width: 100%;
   height: 25px;
@@ -393,11 +393,11 @@ ul.noBullets {
   background-position: 0px 50px;
   background-size: 100% 50px;
   z-index: 1; }
-  /* line 316, ../sass/style.scss */
+  /* line 317, ../sass/style.scss */
   .todoItemBottom:hover {
     opacity: 1; }
 
-/* line 323, ../sass/style.scss */
+/* line 324, ../sass/style.scss */
 .todoItemContent {
   height: 100%;
   width: 100%;
@@ -405,15 +405,15 @@ ul.noBullets {
   margin-top: 40px;
   margin-bottom: 40px; }
 
-/* line 332, ../sass/style.scss */
+/* line 333, ../sass/style.scss */
 .done .todoItemContent {
   color: #aaa; }
 
-/* line 336, ../sass/style.scss */
+/* line 337, ../sass/style.scss */
 .cant .todoItemContent {
   color: #aaa; }
 
-/* line 359, ../sass/style.scss */
+/* line 360, ../sass/style.scss */
 .todoItemDone {
   background-image: url("../img/checkbox.png");
   height: 50px;
@@ -436,14 +436,14 @@ ul.noBullets {
   z-index: 2;
   left: -30px;
   top: -30px; }
-  /* line 353, ../sass/style.scss */
+  /* line 354, ../sass/style.scss */
   .todoItemDone:hover {
     background-position: 0; }
-  /* line 364, ../sass/style.scss */
+  /* line 365, ../sass/style.scss */
   .todoItemDone:hover {
     background-image: url("../img/checkbox-selected.png"); }
 
-/* line 369, ../sass/style.scss */
+/* line 370, ../sass/style.scss */
 .todoItemDelete {
   background-image: url("../img/deletebox.png");
   height: 50px;
@@ -466,14 +466,14 @@ ul.noBullets {
   z-index: 2;
   right: -30px;
   top: -30px; }
-  /* line 353, ../sass/style.scss */
+  /* line 354, ../sass/style.scss */
   .todoItemDelete:hover {
     background-position: 0; }
-  /* line 374, ../sass/style.scss */
+  /* line 375, ../sass/style.scss */
   .todoItemDelete:hover {
     background-image: url("../img/deletebox-selected.png"); }
 
-/* line 381, ../sass/style.scss */
+/* line 382, ../sass/style.scss */
 .linkDelete {
   background-image: url("../img/deletebox-link.png");
   height: 50px;
@@ -499,14 +499,14 @@ ul.noBullets {
   width: 25px;
   height: 25px;
   background-size: 25px 25px; }
-  /* line 353, ../sass/style.scss */
+  /* line 354, ../sass/style.scss */
   .linkDelete:hover {
     background-position: 0; }
-  /* line 389, ../sass/style.scss */
+  /* line 390, ../sass/style.scss */
   .linkDelete:hover {
     background-image: url("../img/deletebox-link-selected.png"); }
 
-/* line 394, ../sass/style.scss */
+/* line 395, ../sass/style.scss */
 .chatContainer {
   overflow: auto;
   padding-top: 20px;
@@ -522,15 +522,15 @@ ul.noBullets {
   background-image: radial-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
   width: 80%; }
 
-/* line 406, ../sass/style.scss */
+/* line 407, ../sass/style.scss */
 .chatContainer .server {
   color: #60c01c; }
 
-/* line 410, ../sass/style.scss */
+/* line 411, ../sass/style.scss */
 .chatContainer .user {
   color: #0697c2; }
 
-/* line 414, ../sass/style.scss */
+/* line 415, ../sass/style.scss */
 .chatContainer hr {
   border: 0;
   height: 1px;
@@ -543,7 +543,7 @@ ul.noBullets {
   background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
   background-image: linear-gradient(left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0)); }
 
-/* line 423, ../sass/style.scss */
+/* line 424, ../sass/style.scss */
 .instructions {
   text-align: left;
   font-size: 1.3em;
@@ -552,7 +552,7 @@ ul.noBullets {
   top: 30px;
   position: absolute; }
 
-/* line 433, ../sass/style.scss */
+/* line 434, ../sass/style.scss */
 textarea {
   font-size: 1em;
   height: 100%;

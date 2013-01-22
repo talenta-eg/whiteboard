@@ -96,7 +96,9 @@ function makeDraggable(object,div) {
     //Handle the user clicking on the div
 
     var handleMouseDown = function(evt) {
+        console.log("Hello");
         if (!object.draggable) return;
+        console.log("Draggabl");
         object.dragging = true;
         object.dragStart = new point(object.pos.x,object.pos.y);
         object.dragMouseStart = new point(object.canvas.mouseX,object.canvas.mouseY);
@@ -119,10 +121,10 @@ function makeDraggable(object,div) {
         //measured from the start of content, without any padding, so we subtract our the difference (the padding on
         //the top and left)
 
-        if (dragged.x > object.canvas.canvasWidth - object.size.x) dragged.x = 
-            object.canvas.canvasWidth - object.size.x;
-        if (dragged.y > object.canvas.canvasHeight - object.size.y) dragged.y = 
-            object.canvas.canvasHeight - object.size.y;
+        if (dragged.x > object.canvas.size.x - object.size.x) dragged.x = 
+            object.canvas.size.x - object.size.x;
+        if (dragged.y > object.canvas.size.y - object.size.y) dragged.y = 
+            object.canvas.size.y - object.size.y;
 
         //Set the textbox's position
 
