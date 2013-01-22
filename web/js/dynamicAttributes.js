@@ -56,7 +56,8 @@ function makeEditable(object,div,onDelete,onEditStateChange) {
         //Set it's text to the current value
 
         textBox.value = div.text;
-
+      	if (textBox.value == "Double click me!") textBox.value = "";
+	
         //Set the keyboard focus to this
 
         textBox.focus();

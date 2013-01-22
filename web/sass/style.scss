@@ -89,6 +89,7 @@ button {
     margin: 10px;
     border: 2px solid #029dcd;
     @include border-radius(10px);
+    background-color:#0697c2;
     @include background-image(linear-gradient(#0697c2,#0a6179));
     background-size:1px 200px;
 }
@@ -267,6 +268,7 @@ canvas {
 
 .todoItemBox.done {
     @include background-image(radial-gradient(rgba(1,0,0,.15),rgba(0,0,0,.05)));
+    color:#808080;
 }
 
 .todoItemBox.cant {

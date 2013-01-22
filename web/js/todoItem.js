@@ -255,7 +255,6 @@ function todoItem(canvas,todoManager,x,y,text,tellNetwork) {
         uber.ignoreNetworkSetText(text);
 
         //Alert the network of the change
-
         NetworkManager.itemEdited(uber.id,uber.textBox.text);
     }
     
@@ -269,7 +268,6 @@ function todoItem(canvas,todoManager,x,y,text,tellNetwork) {
             uber.todoManager.updateList();
 
             //Tell NetworkManager that we've been edited
-
             NetworkManager.itemEdited(uber.id,uber.textBox.text);
         }
         //Update the lines on the screen, because this often resizes the box
