@@ -619,7 +619,7 @@ function todoLink(canvas) {
 
     //The object that will render our dependency lines
 
-    this.line = new bezierLine(canvas,canvas.mouseX,canvas.mouseY,canvas.mouseX,canvas.mouseY,bezierStrength);
+    this.line = new SimpleShapes.bezierLine(canvas,canvas.mouseX,canvas.mouseY,canvas.mouseX,canvas.mouseY,bezierStrength);
 
     //The two items we link between
 

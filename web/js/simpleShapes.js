@@ -1,13 +1,15 @@
 ///////////////////////////////////////////////////////////////////////////
-////////////////////// Static Object Classes //////////////////////////////
+////////////////////// Simple Shapes Classes //////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
+
+var SimpleShapes = {};
 
 function point(x,y) {
     this.x = x;
     this.y = y;
 }
 
-function straightLine(canvas,startX,startY,endX,endY) {
+SimpleShapes.straightLine = function(canvas,startX,startY,endX,endY) {
 
     //These are internal variables
 
@@ -54,7 +56,7 @@ function straightLine(canvas,startX,startY,endX,endY) {
     }
 }
 
-function bezierLine(canvas,startX,startY,endX,endY,bezierStrength) {
+SimpleShapes.bezierLine = function(canvas,startX,startY,endX,endY,bezierStrength) {
 
     //These are internal variables
 
@@ -105,7 +107,7 @@ function bezierLine(canvas,startX,startY,endX,endY,bezierStrength) {
     }
 }
 
-function complexLine(canvas,x,y) {
+SimpleShapes.complexLine = function(canvas,x,y) {
 
     //Create the points array
 
@@ -179,7 +181,7 @@ function complexLine(canvas,x,y) {
     }
 }
 
-function rect(canvas,x,y,width,height) {
+SimpleShapes.rect = function(canvas,x,y,width,height) {
 
     //setup our variables
 
@@ -208,50 +210,3 @@ function rect(canvas,x,y,width,height) {
         if (index != -1) canvas.renderObjects.splice(index, 1);
     }
 }
-
-function textBox(canvas,x,y,text) {
-
-    //setup our variables
-
-    this.pos = new point(x,y);
-    this.text = text;
-
-    //Create the HTML element that will hold the text box
-
-    this.div = document.createElement('div');
-    this.div.innerHTML = this.text;
-    this.div.className = "rounded textbox unselectable";
-    this.div.style.position = "absolute";
-    this.div.style.left = this.pos.x+"px";
-    this.div.style.top = this.pos.y+"px";
-
-    canvas.canvasElm.parentNode.appendChild(this.div);
-
-    //Clever hack to still have 'this' when in functions
-
-    var uber = this;
-
-    //Because we're using HTML to render this text, we need to actively
-    //call functions in order to change it's position or text
-
-    this.setText = function(text) {
-        uber.text = text;
-        uber.div.innerHTML = text;
-    }
-
-    this.setPos = function(x,y) {
-        uber.pos.x = x;
-        uber.pos.y = y;
-        uber.div.style.left = x+"px";
-        uber.div.style.top = y+"px";
-
-        //Resize the window if necessary to accomodate the new movement
-
-        uber.canvas.stretchToContent(uber.lowerRight.x,uber.lowerRight.y);
-    }
-
-    this.onDelete = function() {
-        canvas.canvasElm.parentNode.removeChild(this.div);
-    }
-}
-
