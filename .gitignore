@@ -3,3 +3,6 @@ build
 mysqlPassword.txt
 goDaddyDetails.rtf
 goDaddyDetails.rtf
+.*
+!/.gitignore
+build.properties
