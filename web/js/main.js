@@ -55,7 +55,7 @@ function onLoad() {
 
     //Get our network plugged in
     
-    NetworkManager.initialize();
+    NetworkManager.initialize(todoManager);
 }
 
 //Add a listener to initialize the page when everything has loaded

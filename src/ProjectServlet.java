@@ -123,7 +123,7 @@ public class ProjectServlet extends HttpServlet {
         out.write("<html>");
             out.write("<head>");
                 out.write("<script src='js/utilities.js'></script>");
-                out.write("<script src='js/staticObjects.js'></script>");
+                out.write("<script src='js/simpleShapes.js'></script>");
                 out.write("<script src='js/dynamicAttributes.js'></script>");
                 out.write("<script src='js/canvas.js'></script>");
                 out.write("<script src='js/widgets.js'></script>");
@@ -160,7 +160,7 @@ public class ProjectServlet extends HttpServlet {
                     out.write("<h2 style='margin-top:10px;'>Your Conversation Wall</h2>");
                     out.write("<div class='chatContainer' id='chatText'>");
                     out.write("</div>");
-                    out.write("<input type='text' size='30' id='chatBox'>");
+                    out.write(" <input type='text' size='30' id='chatBox' style='width:73%'>");
                     out.write("<button onclick='NetworkManager.sendChat()'>Post</button>");
                 out.write("</center>");
                 out.write("<center>");
@@ -168,7 +168,7 @@ public class ProjectServlet extends HttpServlet {
                     out.write("<h2 style='margin-top:40px;'>Grow the Project</h2>");
                     out.write("<form method='post' action='/invite?id="+projectId+"'>");
                         out.write("email address to invite:");
-                        out.write("<input type='text' size='30' name='email'><br>");
+                        out.write("<input type='text' size='30' style='width:15%' name='email'>");
                         out.write("<button>Send Invitation</button>");
                     out.write("</form>");
                 out.write("</center>");
