@@ -142,7 +142,7 @@ TodoItem.todoLink = function(canvas,todoManager) {
 
         //Delete our link in the todoManager
 
-        todoManager.removeLink(uber,tellNetwork);
+        uber.todoManager.removeLink(uber,tellNetwork);
     }
 
     //Register our delete button
