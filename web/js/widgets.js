@@ -1,5 +1,13 @@
 var Widget = {};
 
+
+Widget.listWidget = function(parentDiv,todo,text){
+    
+
+
+}
+
+
 /**
  * A widget that is just an editable text box
  */

@@ -316,7 +316,7 @@
         <fileset dir="${build.home}"/>
     </copy>-->
 
-    <scp todir="keenon@datmunch.stanford.edu:/usr/share/tomcat7/apache-tomcat-7.0.34/webapps/ROOT" password="gizz442a">
+    <scp todir="keenon@datmunch.stanford.edu:/usr/share/tomcat7/apache-tomcat-7.0.34/webapps/ROOT" password="gizz442a" trust="true">
         <fileset dir="${build.home}"/>
     </scp>
 
