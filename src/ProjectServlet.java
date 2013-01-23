@@ -160,8 +160,8 @@ public class ProjectServlet extends HttpServlet {
                     out.write("<h2 style='margin-top:10px;'>Your Conversation Wall</h2>");
                     out.write("<div class='chatContainer' id='chatText'>");
                     out.write("</div>");
-                    out.write(" <input type='text' size='30' id='chatBox' style='width:73%'>");
-                    out.write("<button onclick='NetworkManager.sendChat()'>Post</button>");
+                    out.write(" <input type='text' size='30' class='chatBox1' id='chatBox'>");
+                    out.write("<button class='prettyButton' onclick='NetworkManager.sendChat()'>Post</button>");
                 out.write("</center>");
                 out.write("<center>");
                     out.write("<hr>");
@@ -169,10 +169,10 @@ public class ProjectServlet extends HttpServlet {
                     out.write("<form method='post' action='/invite?id="+projectId+"'>");
                         out.write("email address to invite:");
                         out.write("<input type='text' size='30' style='width:15%' name='email'>");
-                        out.write("<button>Send Invitation</button>");
+                        out.write("<button class='prettyButtonLong'>Send Invitation</button>");
                     out.write("</form>");
                 out.write("</center>");
-                out.write("<div class='credits'>this app brought to you with love by Keenon Werling &copy; 2013</div>");
+                out.write("<div class='credits'>this app brought to you with love by Keenon Werling ( and Twain (; ) &copy; 2013</div>");
             out.write("</body>");
         out.write("</html>");
     }

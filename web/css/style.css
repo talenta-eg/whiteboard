@@ -243,7 +243,7 @@ hr {
 
 /* line 206, ../sass/style.scss */
 .projectContainer {
-  width: 80%;
+  width: 90%;
   text-align: center;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -268,7 +268,7 @@ hr {
 .projectBoxContent {
   padding-top: 10px;
   float: left;
-  width: 80%;
+  width: 90%;
   padding-left: 10%;
   padding-right: 10%;
   text-align: center; }
@@ -279,7 +279,7 @@ hr {
   width: 170px;
   left: 60%;
   padding: 5px;
-  text-align: right;
+  text-align: center;
   background-color: #222; }
 
 /* line 245, ../sass/style.scss */
@@ -520,7 +520,7 @@ ul.noBullets {
   background-image: -moz-radial-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
   background-image: -o-radial-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
   background-image: radial-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
-  width: 80%; }
+  width: 90%; }
 
 /* line 407, ../sass/style.scss */
 .chatContainer .server {
@@ -543,7 +543,24 @@ ul.noBullets {
   background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
   background-image: linear-gradient(left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0)); }
 
-/* line 424, ../sass/style.scss */
+/* line 423, ../sass/style.scss */
+.chatBox1 {
+  width: 80%; }
+
+/* line 426, ../sass/style.scss */
+.prettyButton {
+  width: 10%;
+  text-align: center;
+  padding: 10px;
+  margin-top: 20px; }
+
+/* line 432, ../sass/style.scss */
+.prettyButtonLong {
+  text-align: center;
+  padding: 10px;
+  margin-top: 20px; }
+
+/* line 439, ../sass/style.scss */
 .instructions {
   text-align: left;
   font-size: 1.3em;
@@ -552,7 +569,7 @@ ul.noBullets {
   top: 30px;
   position: absolute; }
 
-/* line 434, ../sass/style.scss */
+/* line 449, ../sass/style.scss */
 textarea {
   font-size: 1em;
   height: 100%;

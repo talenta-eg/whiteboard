@@ -204,7 +204,7 @@ hr {
 }
 
 .projectContainer {
-    width:80%;
+    width:90%;
     text-align: center;
     padding-top:20px;
     padding-bottom:20px;
@@ -222,7 +222,7 @@ hr {
 .projectBoxContent {
     padding-top: 10px;
     float:left;
-    width:80%;
+    width:90%;
     padding-left:10%;
     padding-right:10%;
     text-align: center;
@@ -235,7 +235,7 @@ hr {
     width:170px;
     left:60%;
     padding:5px;
-    text-align: right;
+    text-align: center;
     background-color:#222;
 }
 
@@ -401,7 +401,7 @@ $deleteBoxSize:25px;
     height:160px;
     text-align:left;
     @include background-image(radial-gradient(rgba(0,0,0,.15),rgba(0,0,0,.05)));
-    width:80%;
+    width:90%;
 }
 
 .chatContainer .server {
@@ -420,6 +420,21 @@ $deleteBoxSize:25px;
     width:95%;
     @include background-image(linear-gradient(left,rgba(0,0,0,.75),rgba(0,0,0,0)));
 }
+.chatBox1{
+    width:80%;
+}
+.prettyButton{
+    width:10%;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+}
+.prettyButtonLong{
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+}
+
 
 .instructions {
     text-align:left;
