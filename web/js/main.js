@@ -44,7 +44,7 @@ function onLoad() {
 
     //Initialize the todoManager
 
-    todoManager = new todoManager();
+    todoManager = new TodoManager.manager();
 
     //Hook mouse movements
 

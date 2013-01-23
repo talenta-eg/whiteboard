@@ -17,12 +17,12 @@ TodoItem.basicTodoItem = function(canvas,todoManager,x,y,text,tellNetwork) {
     this.pos = new point(x,y);
     this.cleanupFunctions = [];
 
-    TodoItem.buildHTML(this,TodoItem.textWidget);
+    TodoItem.buildHTML(this,text,TodoItem.textWidget);
     TodoItem.makeDraggable(this);
     TodoItem.makeLinkable(this);
     TodoItem.manageLinkDependencies(this);
     TodoItem.dragLinks(this);
-    TodoItem.addToManager(this,todoManager);
+    TodoItem.addTodoManager(this,todoManager);
 
     //This is a sneaky trick to not lose 'this' when we handle events
 
@@ -53,9 +53,10 @@ TodoItem.basicTodoItem = function(canvas,todoManager,x,y,text,tellNetwork) {
 /*
  * The class that controls the todo links
  */
-TodoItem.todoLink = function(canvas) {
+TodoItem.todoLink = function(canvas,todoManager) {
 
     this.canvas = canvas;
+    this.todoManager = todoManager;
 
     //Amount of curve in dependency lines
 
@@ -134,21 +135,14 @@ TodoItem.todoLink = function(canvas) {
     }
 
     this.onDelete = function(tellNetwork) {
+
+        //Delete our bezier line
+
         uber.line.onDelete();
-        if (uber.upperItem && uber.lowerItem) {
-            uber.upperItem.removeLowerLink(uber);
-            uber.lowerItem.removeUpperLink(uber);
 
-            //Let NetworkManager know about the our deletion
+        //Delete our link in the todoManager
 
-            if (tellNetwork) {
-                NetworkManager.todoItemDependencyRemoved(uber.upperItem.id,uber.lowerItem.id);
-            }
-        }
-        canvas.draw();
-        if (uber.deleteButton.parentNode) {
-            uber.deleteButton.parentNode.removeChild(uber.deleteButton);
-        }
+        todoManager.removeLink(uber,tellNetwork);
     }
 
     //Register our delete button
@@ -161,8 +155,8 @@ TodoItem.todoLink = function(canvas) {
 /**
  * A widget that is just an editable text box
  */
-TodoItem.textWidget = function(parentDiv,todo) {
-    todo.text = "Double Click Me!";
+TodoItem.textWidget = function(parentDiv,todo,text) {
+    todo.text = text;
     todo.editable = true;
 
     //Create the editable text box
@@ -179,7 +173,7 @@ TodoItem.textWidget = function(parentDiv,todo) {
         todo.draggable = !editing;
         if (!editing) {
             todo.text = todo.textBox.innerHTML;
-            todo.todoManager.updateList();
+            todo.todoManager.updateList(todo);
 
             //Tell NetworkManager that we've been edited
             NetworkManager.itemEdited(todo.id,todo.textBox.text);
@@ -196,7 +190,7 @@ TodoItem.textWidget = function(parentDiv,todo) {
     todo.ignoreNetworkSetText = function(text) {
         todo.text = text;
         todo.textBox.innerHTML = text;
-        todo.todoManager.updateList();
+        todo.todoManager.updateList(todo);
 
         //This is the hidden variable in makeEditable to save what text to use
         //TODO: This is totally a hack, need a cleaner interface with makeEditable
@@ -222,7 +216,7 @@ TodoItem.textWidget = function(parentDiv,todo) {
  * Builds the HTML of a todo item, and can take any
  * widget as the central element to be housed.
  */
-TodoItem.buildHTML = function(todo,widget) {
+TodoItem.buildHTML = function(todo,text,widget) {
     /* Todo Item HTML:
         <div class="todoItemBox" style="position:absolute;left:210px;top:310px">
             <button class="todoItemDone"></button>
@@ -249,7 +243,7 @@ TodoItem.buildHTML = function(todo,widget) {
 
     //Add the widget
 
-    todo.widget = new widget(todo.div,todo);
+    todo.widget = new widget(todo.div,todo,text);
     
     //Create the done button
 
@@ -384,25 +378,16 @@ TodoItem.makeDraggable = function(todo) {
 /**
  * Adds this todo item to the Todo Manager
  */
-TodoItem.addToManager = function(todo,todoManager) {
+TodoItem.addTodoManager = function(todo,todoManager) {
 
     todo.todoManager = todoManager;
 
     //Add ourselves to the todoManager so we can get our item rendered on the todolist
 
-    todo.todoManager.todoItems.push(todo);
-    todo.todoManager.updateList();
+    todo.todoManager.addTodo(todo);
 
     todo.cleanupFunctions.push(function() {
-
-        //Remove ourselves only if we are still in the array
-
-        index = todo.todoManager.todoItems.indexOf(todo);
-        if (index != -1) todo.todoManager.todoItems.splice(index, 1);
-
-        //Update the todo list
-        
-        todo.todoManager.updateList();
+        todo.todoManager.removeTodo(todo);
     });
 }
 
@@ -429,18 +414,6 @@ TodoItem.makeLinkable = function(todo) {
             todo.lowerLinks[i].updateLine();
         }
     }
-
-    todo.cleanupFunctions.push(function() {
-
-        //Delete all links pointing to us
-
-        for (var i = 0; i < todo.upperLinks.length; i++) {
-            todo.upperLinks[i].onDelete();
-        }
-        for (var i = 0; i < todo.lowerLinks.length; i++) {
-            todo.lowerLinks[i].onDelete();
-        }
-    });
 }
 
 /**
@@ -456,31 +429,18 @@ TodoItem.manageLinkDependencies = function(todo) {
         todo.done = !todo.done;
         if (todo.done) {
             todo.doneButton.style.display = "none";
+            todo.div.className = "todoItemBox done";
         }
-        for (var i = 0; i < todo.lowerLinks.length; i++) {
-            if (!todo.done && todo.lowerLinks[i].lowerItem.done) {
 
-                //Delete todo arc as a contradiction, because you can't have an item that's
-                //done with dependencies that are not done yet
+        //Deals with links
 
-                todo.lowerLinks[i].onDelete();
-            }
-            else {
-
-                //Tell our lower items to check if they can get done yet, because we just
-                //finished
-
-                todo.lowerLinks[i].lowerItem.onUpperLinkDone();
-            }
-        }
-        todo.todoManager.updateList();
+        todo.todoManager.updateTodoItemDone(todo);
     }
 
     todo.toggleDone = function() {
         todo.ignoreNetworkToggleDone();
         if (todo.done) {
             NetworkManager.todoItemDone(todo.id);
-            todo.div.className = "todoItemBox done";
         }
         else {
             NetworkManager.todoItemUndone(todo.id);
@@ -493,7 +453,7 @@ TodoItem.manageLinkDependencies = function(todo) {
         if (!todo.done) {
             todo.canDo = canDo;
             todo.doneButton.style.display = todo.canDo ? "" : "none";
-            todo.todoManager.updateList();
+            todo.todoManager.updateList(todo);
 
             //Update the lines on the screen, because changing the can-do status often
             //resizes the box
@@ -504,92 +464,9 @@ TodoItem.manageLinkDependencies = function(todo) {
         }
     }
 
-    //todo checks all the dependency links and updates whether or not this item
-    //is available to be done. todo would be faster to do with an outstanding-links
-    //counter, but that introduces bugs if the counter doesn't get updated in some
-    //edge-case. Slow and steady wins the race with UI.
-
-    todo.updateCanDo = function() {
-        var canDo = true;
-        for (var i = 0; i < todo.upperLinks.length; i++) {
-            if (!todo.upperLinks[i].upperItem.done) {
-                canDo = false;
-                break;
-            }
-        }
-        todo.setCanDo(canDo);
-    }
-
     //Register our done button
 
     todo.doneButton.onclick = todo.toggleDone;
-
-    //todo lets us manage our link flow
-
-    todo.addUpperLink = function(link) {
-        todo.upperLinks.push(link);
-        if (!link.upperItem.done) {
-            if (todo.done) {
-
-                //Delete todo arc, because it's a contradiction to have a done item
-                //with a dependency to an item that isn't done yet
-
-                link.onDelete();
-            }
-            else {
-
-                //Definately can't do todo todo now, because the item that we're newly
-                //dependant on isn't done
-
-                todo.setCanDo(false)
-            }
-        }
-    }
-
-    todo.addLowerLink = function(link) {
-        todo.lowerLinks.push(link);
-    }
-
-    todo.onUpperLinkDone = function() {
-
-        //We have to check all the items
-
-        todo.updateCanDo();
-    }
-
-    todo.onUpperLinkUndone = function() {
-
-        //Definately can't do todo todo now, so we can set this to false
-
-        todo.setCanDo(false);
-    }
-
-    //todo is called by the link when it gets deleted. Don't call this
-    //directly
-
-    todo.removeUpperLink = function(link) {
-
-        //Remove ourselves only if we are still in the array
-
-        var index = todo.upperLinks.indexOf(link);
-        if (index != -1) todo.upperLinks.splice(index, 1);
-
-        //We're not sure whether todo means we can now be executed, so we
-        //need to check all the remaining upper links
-
-        todo.updateCanDo();
-    }
-
-    //todo is called by the link when it gets deleted. Don't call this
-    //directly
-
-    todo.removeLowerLink = function(link) {
-
-        //Remove ourselves only if we are still in the array
-
-        var index = todo.lowerLinks.indexOf(link);
-        if (index != -1) todo.lowerLinks.splice(index, 1);
-    }
 }
 
 /**
@@ -650,7 +527,7 @@ TodoItem.dragLinks = function(todo) {
 
         //Make the link
 
-        todo.draggingLink = new TodoItem.todoLink(todo.canvas);
+        todo.draggingLink = new TodoItem.todoLink(todo.canvas,todo.todoManager);
 
         //Tell the link who we are
 
@@ -668,7 +545,7 @@ TodoItem.dragLinks = function(todo) {
 
         //Make the link
 
-        todo.draggingLink = new TodoItem.todoLink(todo.canvas);
+        todo.draggingLink = new TodoItem.todoLink(todo.canvas,todo.todoManager);
 
         //Tell the link who we are
 
@@ -739,12 +616,10 @@ TodoItem.dragLinks = function(todo) {
         if (!todo.draggingLink) return;
 
         if (todo.draggingLink.upperItem && todo.draggingLink.lowerItem) {
-            todo.draggingLink.upperItem.addLowerLink(todo.draggingLink);
-            todo.draggingLink.lowerItem.addUpperLink(todo.draggingLink);
 
-            //Let NetworkManager know about the new link
+            //Let the todoManager handle link data management
 
-            NetworkManager.todoItemDependencyLinked(todo.draggingLink.upperItem.id,todo.draggingLink.lowerItem.id);
+            todo.todoManager.makeLinkReal(todo.draggingLink);
             todo.draggingLink = null;
         }
         else {

@@ -30,11 +30,11 @@ function makeEditable(object,div,onDelete,onEditStateChange) {
         textBox.removeEventListener('keydown',handleKeyDown,false);  
 
         //Change HTML back
-div.text = textBox.value;
+        div.text = textBox.value;
         div.innerHTML = div.text;
         div.editing = false;
         onEditStateChange(div.editing);
-        if (div.text == "") onDelete();
+        if (div.text == "") object.onDelete();
     }
 
     var handleDoubleClick = function(evt) {
