@@ -16,13 +16,13 @@ NetworkManager.sendChat = function() {
     document.getElementById('chatBox').value = "";
 }
 
-NetworkManager.connect = (function(host) {
-    if ('WebSocket' in window) {
+NetworkManager.connect = function(host) {
+    if ('WebSocket' in window&&host!="wss:///chat") {
         NetworkManager.socket = new WebSocket(host);
-    } else if ('MozWebSocket' in window) {
+    } else if ('MozWebSocket' in window&&host!="wss:///chat") {
         NetworkManager.socket = new MozWebSocket(host);
     } else {
-
+        
         //Web sockets aren't supported. Time to quit
 
         return;
@@ -162,7 +162,7 @@ NetworkManager.connect = (function(host) {
             NetworkManager.processMessage(messageObj);
         }
     };
-});
+};
 
 //Connect our websocket on the right protocol
 
@@ -180,8 +180,10 @@ NetworkManager.initialize = function() {
 //Manage raw message sending
 
 NetworkManager.sendMessage = function(message) {
-    if (message != null) {
-        NetworkManager.socket.send(JSON.stringify(message));
+    if('WebSocket' in window){
+        if (message != null&&NetworkManager.socket!=null) {
+                NetworkManager.socket.send(JSON.stringify(message));      
+        }
     }
 };
 
