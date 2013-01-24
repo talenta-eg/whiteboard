@@ -229,11 +229,11 @@ hr {
 }
 
 .headerBar {
-    position:relative;
+    position:absolute;
     //display:inline-block;
     //height:25px;
     width:170px;
-    left:60%;
+    right:5%;
     padding:5px;
     text-align: center;
     background-color:#222;

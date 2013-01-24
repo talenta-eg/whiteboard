@@ -275,9 +275,9 @@ hr {
 
 /* line 231, ../sass/style.scss */
 .headerBar {
-  position: relative;
+  position: absolute;
   width: 170px;
-  left: 60%;
+  right: 5%;
   padding: 5px;
   text-align: center;
   background-color: #222; }

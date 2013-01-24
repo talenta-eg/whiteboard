@@ -209,7 +209,8 @@ public class ChatWebSocketServlet extends WebSocketServlet {
             try {
                 String messageType = message.getString("type");
                 if (messageType.equals("chat")) {
-                    json.put(message);
+                    // for now, don't store chats
+                    //json.put(message);
                 }
                 else if (messageType.equals("todoItemCreated")) {
                     String id = ""+message.getInt("id");

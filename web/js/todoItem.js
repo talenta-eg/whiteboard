@@ -29,7 +29,7 @@ TodoItem.basicTodoItem = function(canvas,todoManager,x,y,text,tellNetwork) {
     var uber = this; 
 
     this.onDelete = function(tellNetwork) {
-        if (!window.confirm("Really delete?")) return;
+        if (tellNetwork && !window.confirm("Really delete?")) return;
 
         //All of our cleanup is put into cleanupFunctions by the adjective
         //functions
