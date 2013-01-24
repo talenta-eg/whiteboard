@@ -140,9 +140,11 @@ public class ProjectServlet extends HttpServlet {
             out.write("<body>");
                 out.write("<div style='margin-top:20px;'>");
                     out.write("<center>");
-                        out.write("<img src='img/tree.png'>");
-                        out.write("<h1 class='tree'>"+projectName+"</h1><hr>");
-                        out.write("<h2>Your Project Tree</h2>");
+                        out.write("<div style='text-align:left; margin-left:5%' >");
+                            out.write("<img src='img/tree.png'>");
+                            out.write("<h1 class='tree'>"+projectName+"</h1><hr>");
+                            out.write("<h2>Your Project Tree</h2>");
+                        out.write("</div>");
                         out.write("<div class='projectContainer todo' style='overflow:auto;height:70%;' id='workflowparent'>");
                             out.write("<div class='instructions' id='instructions'>");
                                 out.write("Instructions:<br>");
