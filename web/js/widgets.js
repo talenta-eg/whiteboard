@@ -10,14 +10,12 @@ Widget.listWidget = function(parentDiv,todo,text){
     this.miniListItem = function(parentDiv,text) {
 	this.myDiv = document.createElement('div');
 	this.myDiv.innerHTML = "<input></input>";
+
 	parentDiv.appendChild(this.myDiv);
-
-
 	    this.onEnter = function(evt){
-		if(evt.keyCode == 13){
-		}
+            if(evt.keyCode == 13){
+            }
 	    }
-
 	    parentDiv.addEventListener("keypress", this.onEnter);
     }
     
