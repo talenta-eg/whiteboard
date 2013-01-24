@@ -18,11 +18,11 @@ TodoItem.basicTodoItem = function(canvas,todoManager,x,y,text,tellNetwork) {
     this.cleanupFunctions = [];
 
     TodoItem.buildHTML(this,text,Widget.textWidget);
+    TodoItem.addTodoManager(this,todoManager);
     TodoItem.makeDraggable(this);
     TodoItem.makeLinkable(this);
     TodoItem.manageLinkDependencies(this);
     TodoItem.dragLinks(this);
-    TodoItem.addTodoManager(this,todoManager);
 
     //This is a sneaky trick to not lose 'this' when we handle events
 
@@ -136,13 +136,13 @@ TodoItem.todoLink = function(canvas,todoManager) {
 
     this.onDelete = function(tellNetwork) {
 
-        //Delete our bezier line
-
-        uber.line.onDelete();
-
         //Delete our link in the todoManager
 
         uber.todoManager.removeLink(uber,tellNetwork);
+
+        //Delete our bezier line
+
+        uber.line.onDelete();
     }
 
     //Register our delete button

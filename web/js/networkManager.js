@@ -65,7 +65,7 @@ NetworkManager.connect = function(host) {
         }
         else if (messageObj.type == "todoItemCreated") {
             if (NetworkManager.objects.length < messageObj.id || NetworkManager.objects[messageObj.id] == null) {
-                var newTodo = new TodoItem.basicTodoItem(workflowCanvas,todoManager,messageObj.xpos,messageObj.ypos,messageObj.content,false);
+                var newTodo = new TodoItem.basicTodoItem(workflowCanvas,NetworkManager.todoManager,messageObj.xpos,messageObj.ypos,messageObj.content,false);
 
                 //Drop it in the array at a consisten spot across the network
 
@@ -100,12 +100,12 @@ NetworkManager.connect = function(host) {
             }
         }
         else if (messageObj.type == "todoItemsDependencyLinked") {
-            var newLink = new TodoItem.todoLink(workflowCanvas);
+            var newLink = new TodoItem.todoLink(workflowCanvas,NetworkManager.todoManager);
             newLink.upperItem = NetworkManager.objects[messageObj.upper];
             newLink.lowerItem = NetworkManager.objects[messageObj.lower];
             if (newLink.upperItem && newLink.lowerItem) {
-                this.todoManager.addLowerLink(newLink.upperItem,newLink);
-                this.todoManager.addUpperLink(newLink.lowerItem,newLink);
+                NetworkManager.todoManager.addLowerLink(newLink.upperItem,newLink);
+                NetworkManager.todoManager.addUpperLink(newLink.lowerItem,newLink);
                 workflowCanvas.draw();
             }
         }
@@ -168,6 +168,8 @@ NetworkManager.connect = function(host) {
 //Connect our websocket on the right protocol
 
 NetworkManager.initialize = function(todoManager) {
+    NetworkManager.todoManager = todoManager;
+
     if (window.location.protocol == 'http:') {
 
         // Plug the user in to the correct WebSocket, and include the data we used to specify the project
@@ -176,7 +178,6 @@ NetworkManager.initialize = function(todoManager) {
     } else {
         NetworkManager.connect('wss://' + window.location.host + '/chat' + window.location.search);
     }
-    this.todoManager = todoManager;
 };
 
 //Manage raw message sending
