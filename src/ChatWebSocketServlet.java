@@ -170,7 +170,7 @@ public class ChatWebSocketServlet extends WebSocketServlet {
                     //clear all the chat logs, and then save the cleared version when
                     //it quits.
 
-                    boolean clearChats = true;
+                    /*boolean clearChats = true;
                     if (clearChats) {
 
                         //Try cleaning out the chats in our json
@@ -182,7 +182,8 @@ public class ChatWebSocketServlet extends WebSocketServlet {
                             }
                         }
 
-                        //That means that we have to fix our map
+                        //That means that we have to fix our map, but this doesn't cover fixing the links
+                        //That you'll have to do by hand :(
 
                         for (int i = 0; i < json.length(); i++) {
                             if (json.optJSONObject(i).optString("type").equals("todoItemCreated")) {
@@ -190,7 +191,7 @@ public class ChatWebSocketServlet extends WebSocketServlet {
                                 map.put(""+json.getJSONObject(i).getInt("id"),i);
                             }
                         }
-                    }
+                    }*/
                 }
                 catch (Exception e) {
 
