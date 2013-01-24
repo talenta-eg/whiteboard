@@ -162,6 +162,35 @@ public class ChatWebSocketServlet extends WebSocketServlet {
                     JSONObject total = new JSONObject(state);
                     json = total.getJSONArray("json");
                     map = total.getJSONObject("map");
+
+                    //Here's some code for clearing out the chat logs of a project,
+                    //because chat logs can get bloated, and sending them all over
+                    //a websocket, in JSON of all formats, can be super sloooow.
+                    //This'll be unnecessary after its first deploy, because it will
+                    //clear all the chat logs, and then save the cleared version when
+                    //it quits.
+
+                    boolean clearChats = true;
+                    if (clearChats) {
+
+                        //Try cleaning out the chats in our json
+
+                        for (int i = 0; i < json.length(); i++) {
+                            if (json.optJSONObject(i).optString("type").equals("chat")) {
+                                json.remove(i);
+                                i--;
+                            }
+                        }
+
+                        //That means that we have to fix our map
+
+                        for (int i = 0; i < json.length(); i++) {
+                            if (json.optJSONObject(i).optString("type").equals("todoItemCreated")) {
+                                map.remove(""+json.getJSONObject(i).getInt("id"));
+                                map.put(""+json.getJSONObject(i).getInt("id"),i);
+                            }
+                        }
+                    }
                 }
                 catch (Exception e) {
 
@@ -302,7 +331,7 @@ public class ChatWebSocketServlet extends WebSocketServlet {
 
                     //Get the location of this item from our map
 
-                    System.out.println(message.toString());
+                    //System.out.println(message.toString());
 
                     String id = ""+message.getInt("id");
                     int index = map.getInt(id);
