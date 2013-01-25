@@ -239,8 +239,21 @@ public class ChatWebSocketServlet extends WebSocketServlet {
             try {
                 String messageType = message.getString("type");
                 if (messageType.equals("chat")) {
-                    // for now, don't store chats
-                    //json.put(message);
+                    /* for now, don't store chats
+                     //json.put(message);
+                     @JAN TODO:
+                    // store the message in the new chats table which is:
+mysql> describe chats;
++-----------+--------------+------+-----+---------+----------------+
+| Field     | Type         | Null | Key | Default | Extra          |
++-----------+--------------+------+-----+---------+----------------+
+| id        | bigint(20)   | NO   | PRI | NULL    | auto_increment |
+| projectId | mediumint(9) | NO   |     | NULL    |                |
+| userId    | mediumint(9) | NO   |     | NULL    |                |
+| message   | text         | YES  |     | NULL    |                |
++-----------+--------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+ */
                 }
                 else if (messageType.equals("todoItemCreated")) {
                     String id = ""+message.getInt("id");
