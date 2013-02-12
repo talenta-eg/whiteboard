@@ -1,0 +1,15 @@
+var textBox;
+
+
+updateText = function(evt){
+	console.log(evt.keyCode);	
+	
+}
+onLoad = function(){
+	textBox= document.getElementById('textBox');
+	textBox.addEventListener('keydown',updateText);
+}
+
+document.addEventListener('DOMContentLoaded',onLoad);
+
+

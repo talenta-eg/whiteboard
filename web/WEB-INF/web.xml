@@ -71,124 +71,21 @@
          You can define any number of servlets, including zero.
     -->
 
-    <servlet>
-      <servlet-name>login</servlet-name>
-      <servlet-class>chatbox.LoginServlet</servlet-class>
-      <!-- Load this servlet at server startup time -->
-      <load-on-startup>5</load-on-startup>
-    </servlet>
     <servlet-mapping>
-      <servlet-name>login</servlet-name>
-      <url-pattern>/</url-pattern>
+        <servlet-name>fileserver</servlet-name>
+        <url-pattern>*.html</url-pattern>
+        <url-pattern>*.css</url-pattern>
+        <url-pattern>*.js</url-pattern>
     </servlet-mapping>
-
     <servlet>
-      <servlet-name>createAccount</servlet-name>
-      <servlet-class>chatbox.CreateAccountServlet</servlet-class>
+      <servlet-name>socket</servlet-name>
+      <servlet-class>MySocketServlet</servlet-class>
       <!-- Load this servlet at server startup time -->
       <load-on-startup>5</load-on-startup>
     </servlet>
     <servlet-mapping>
-      <servlet-name>createAccount</servlet-name>
-      <url-pattern>/createaccount</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-      <servlet-name>logout</servlet-name>
-      <servlet-class>chatbox.LogoutServlet</servlet-class>
-      <!-- Load this servlet at server startup time -->
-      <load-on-startup>5</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-      <servlet-name>logout</servlet-name>
-      <url-pattern>/logout</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-      <servlet-name>activate</servlet-name>
-      <servlet-class>chatbox.ActivateServlet</servlet-class>
-      <!-- Load this servlet at server startup time -->
-      <load-on-startup>5</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-      <servlet-name>activate</servlet-name>
-      <url-pattern>/activate</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-      <servlet-name>reset</servlet-name>
-      <servlet-class>chatbox.ResetAccountServlet</servlet-class>
-      <!-- Load this servlet at server startup time -->
-      <load-on-startup>5</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-      <servlet-name>reset</servlet-name>
-      <url-pattern>/reset</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-      <servlet-name>manage</servlet-name>
-      <servlet-class>chatbox.ManageServlet</servlet-class>
-      <!-- Load this servlet at server startup time -->
-      <load-on-startup>5</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-      <servlet-name>manage</servlet-name>
-      <url-pattern>/manage</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-      <servlet-name>createproject</servlet-name>
-      <servlet-class>chatbox.CreateProjectServlet</servlet-class>
-      <!-- Load this servlet at server startup time -->
-      <load-on-startup>5</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-      <servlet-name>createproject</servlet-name>
-      <url-pattern>/createproject</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-      <servlet-name>project</servlet-name>
-      <servlet-class>chatbox.ProjectServlet</servlet-class>
-      <!-- Load this servlet at server startup time -->
-      <load-on-startup>5</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-      <servlet-name>project</servlet-name>
-      <url-pattern>/project</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-      <servlet-name>invite</servlet-name>
-      <servlet-class>chatbox.InviteServlet</servlet-class>
-      <!-- Load this servlet at server startup time -->
-      <load-on-startup>5</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-      <servlet-name>invite</servlet-name>
-      <url-pattern>/invite</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-      <servlet-name>chat</servlet-name>
-      <servlet-class>chatbox.ChatWebSocketServlet</servlet-class>
-      <!-- Load this servlet at server startup time -->
-      <load-on-startup>5</load-on-startup>
-      <!-- Sets Buffer to 20mb instead of 2mb -->
-      <init-param>
-        <param-name>byteBufferMaxSize</param-name>
-        <param-value>20971520</param-value>
-      </init-param>
-      <init-param>
-        <param-name>charBufferMaxSize</param-name>
-        <param-value>20971520</param-value>
-      </init-param>
-    </servlet>
-
-    <servlet-mapping>
-      <servlet-name>chat</servlet-name>
-      <url-pattern>/chat</url-pattern>
+      <servlet-name>socket</servlet-name>
+      <url-pattern>/realtime</url-pattern>
     </servlet-mapping>
 
     <!-- Define the default session timeout for your application,
@@ -199,13 +96,5 @@
     <session-config>
       <session-timeout>30</session-timeout>    <!-- 30 minutes -->
     </session-config>
-
-    <security-constraint>
-        <url-pattern>/</url-pattern> <!-- define all url patterns that need to be protected-->
-
-        <user-data-constraint>
-            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-        </user-data-constraint>
-    </security-constraint>
 
 </web-app>
